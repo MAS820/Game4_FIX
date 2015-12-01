@@ -108,17 +108,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nav: {fileID: 0}
   state: 0
-  MatRatWonder: {fileID: 2100000, guid: 92eb46455227bc94292f7c135b50c0d0, type: 2}
   ratWaypoint: []
   wonderSpeed: .100000001
-  MatRatIdle: {fileID: 2100000, guid: f6a6bff215fe71043b912c5a7d0a26e7, type: 2}
-  idleTimer: 5
-  MatRatFlee: {fileID: 2100000, guid: 62db7de211dfd6042a9b05fb4b683a67, type: 2}
   fleeSpeed: .5
   target: {fileID: 0}
-  MatRatTrapped: {fileID: 2100000, guid: f0998337e77c37c4cba9d57633ec57c7, type: 2}
-  rend: {fileID: 0}
-  trappedTimer: 5
 --- !u!135 &13589586
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -127,7 +120,7 @@ SphereCollider:
   m_GameObject: {fileID: 168756}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}
@@ -178,42 +171,6 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_TagString
       value: Rat
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: target
-      value: 
-      objectReference: {fileID: 167340, guid: db10f57845783b846a0b44ba5daa51a4, type: 2}
-    - target: {fileID: 0}
-      propertyPath: GS
-      value: 
-      objectReference: {fileID: 167340, guid: db10f57845783b846a0b44ba5daa51a4, type: 2}
-    - target: {fileID: 0}
-      propertyPath: material2
-      value: 
-      objectReference: {fileID: 2100000, guid: f0998337e77c37c4cba9d57633ec57c7, type: 2}
-    - target: {fileID: 0}
-      propertyPath: MatRatIdle
-      value: 
-      objectReference: {fileID: 2100000, guid: f6a6bff215fe71043b912c5a7d0a26e7, type: 2}
-    - target: {fileID: 0}
-      propertyPath: MatRatFlee
-      value: 
-      objectReference: {fileID: 2100000, guid: 62db7de211dfd6042a9b05fb4b683a67, type: 2}
-    - target: {fileID: 0}
-      propertyPath: MatRatTrapped
-      value: 
-      objectReference: {fileID: 2100000, guid: f0998337e77c37c4cba9d57633ec57c7, type: 2}
-    - target: {fileID: 0}
-      propertyPath: MatRatWonder
-      value: 
-      objectReference: {fileID: 2100000, guid: 92eb46455227bc94292f7c135b50c0d0, type: 2}
-    - target: {fileID: 0}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: trappedTimer
-      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

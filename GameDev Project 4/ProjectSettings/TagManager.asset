@@ -6,11 +6,6 @@ TagManager:
   tags:
   - CyclopsWaypoint
   - Lamps
-  - Rat
-  - MainLights
-  - RatSpawn
-  - RatWaypoint
-  - GameState
   layers:
   - Default
   - TransparentFX
