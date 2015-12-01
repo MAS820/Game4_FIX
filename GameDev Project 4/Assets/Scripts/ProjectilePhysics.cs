@@ -20,7 +20,13 @@ public class ProjectilePhysics : MonoBehaviour {
 
 	//When this collides with anything it sets its active state to false and destroys its self
 	void OnTriggerEnter(Collider other){
+		if(other.tag == "Rat"){
+			RatAI ratai;
+			ratai = other.GetComponent<RatAI>();
+			ratai.state = RatAI.State.TRAPPED;
+		}
+
 		this.gameObject.SetActive (false);
-		Destroy (this);
+		Destroy (this.gameObject);
 	}
 }
