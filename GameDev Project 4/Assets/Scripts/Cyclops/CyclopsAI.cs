@@ -38,7 +38,7 @@ public class CyclopsAI : MonoBehaviour
     //Patrolling var
     public Material MatCyclopsPatrolling;
     public GameObject[] CyclopsWaypoints;
-    public float patrolSpeed = 2f;
+    public float patrolSpeed = 4f;
 
 
     void Start()
@@ -54,11 +54,11 @@ public class CyclopsAI : MonoBehaviour
 
         //Nav Mesh agent sets up the mesh that our characters can move on.
         nav = GetComponent<NavMeshAgent>();
-        nav.updatePosition = true;
-        nav.updateRotation = true;
+        //nav.updatePosition = true;
+        //nav.updateRotation = true;
         alive = true;
         //autobraking causes the character to pause before each waypoint
-        // nav.autoBraking = false;
+         nav.autoBraking = false;
 
         //char references
         player = GameObject.Find("Player");
@@ -102,18 +102,21 @@ public class CyclopsAI : MonoBehaviour
 
         //Get the position of the player. Get the delta vector between player / enemy
         Vector3 sightingDeltaPos = cyclopsSight.previousSighting - transform.position;
-
+        float dist = Vector3.Distance(cyclopsSight.previousSighting, transform.position);
         //Get the magnitude of the vector (distance)
-        if (sightingDeltaPos.sqrMagnitude > 4f)
+        if (dist <= 6)
         {
             //Tell enemy to walk to player location
-            nav.SetDestination(waypoint);
-            //nav.destination = waypoint;
-            cyclopsController.Move(nav.desiredVelocity);
+           // nav.SetDestination(waypoint);
+            nav.destination = waypoint;
+            //cyclopsController.Move(nav.desiredVelocity);
         }
-
+        else
+        {
+            cyclopsSight.playerInSight = false;
+        }
         //If we're nearing the destination, add to chase timer.
-        if (nav.remainingDistance < nav.stoppingDistance)
+        /*if (nav.remainingDistance < nav.stoppingDistance)
         {
             chaseTimer += Time.deltaTime;
             //Chasing cooldown, ensures that monster continues moving
@@ -125,7 +128,7 @@ public class CyclopsAI : MonoBehaviour
         else
         {
             chaseTimer = 0f;
-        }
+        }*/
     }
 
     void Patrolling()
@@ -137,9 +140,9 @@ public class CyclopsAI : MonoBehaviour
         nav.speed = patrolSpeed;
         if (nav.remainingDistance < nav.stoppingDistance)
         {
-            nav.SetDestination(waypoint);
-            //nav.destination = waypoint;
-            cyclopsController.Move(nav.desiredVelocity);
+            //nav.SetDestination(waypoint);
+            nav.destination = waypoint;
+            //cyclopsController.Move(nav.desiredVelocity);
 
             //If we reach the end of the list, start over
             if (wayPointIndex == wayPoints.Length - 1)
@@ -164,7 +167,7 @@ public class CyclopsAI : MonoBehaviour
             }
             else if (cyclopsSight.playerInSight)
             {
-                state = CyclopsAI.State.CHASING;
+                //state = CyclopsAI.State.CHASING;
             }
         }
 
