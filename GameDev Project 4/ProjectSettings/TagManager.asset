@@ -11,6 +11,7 @@ TagManager:
   - RatSpawn
   - RatWaypoint
   - GameState
+  - Projectile
   layers:
   - Default
   - TransparentFX

@@ -11,7 +11,7 @@ GameObject:
   - 114: {fileID: 11482418}
   m_Layer: 0
   m_Name: GameState
-  m_TagString: Untagged
+  m_TagString: GameState
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -43,11 +43,13 @@ MonoBehaviour:
   staminaBorder: {fileID: 0}
   staminaBackground: {fileID: 0}
   staminaBar: {fileID: 0}
+  NumRatsHeld: {fileID: 0}
   playerController: {fileID: 0}
   ratSpawnLocations: []
   ratSpawnRate: 3
   maxActiveRats: 3
-  Rat: {fileID: 0}
+  Rat: {fileID: 168756, guid: 140a5ec52ab3ec5428b248a670b6b05b, type: 2}
+  numActiveRats: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
