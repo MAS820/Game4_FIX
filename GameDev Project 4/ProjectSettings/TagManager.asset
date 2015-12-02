@@ -11,7 +11,11 @@ TagManager:
   - RatSpawn
   - RatWaypoint
   - GameState
+<<<<<<< HEAD
   - Projectile
+=======
+  - Cyclops
+>>>>>>> 45d6e18c69efda9cfc7970c7bc48f9dcc9b5333c
   layers:
   - Default
   - TransparentFX

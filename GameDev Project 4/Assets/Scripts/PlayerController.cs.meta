@@ -1,10 +1,12 @@
 fileFormatVersion: 2
 guid: 64c2e7e1cfa9e2544993d5ef657e2b9c
-timeCreated: 1448487274
+timeCreated: 1449079561
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - projectile: {fileID: 150126, guid: ee751d9f1f293be4cb540a6e684ddc77, type: 2}
+  - projectileLocation: {fileID: 125356, guid: 296bd1f1b5fe71843a21f92767863f28, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
