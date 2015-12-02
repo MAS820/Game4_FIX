@@ -12,7 +12,11 @@ TagManager:
   - RatSpawn
   - RatWaypoint
   - MainLights
+<<<<<<< HEAD
   - RockPile
+=======
+  - CyclopsWaypoint
+>>>>>>> origin/master
   layers:
   - Default
   - TransparentFX
