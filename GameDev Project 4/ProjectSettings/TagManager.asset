@@ -11,6 +11,7 @@ TagManager:
   - RatSpawn
   - RatWaypoint
   - GameState
+  - Cyclops
   layers:
   - Default
   - TransparentFX
