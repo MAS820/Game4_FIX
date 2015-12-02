@@ -10,6 +10,9 @@ public class GameState : MonoBehaviour {
     public Image staminaBackground;
     public Image staminaBar;
 	public Text NumRatsHeld;
+    public Text uRRPS;
+    public Text numRatsDigging;
+    public Text playerVisible;
     public PlayerController playerController;
 
 	//Spawning rats variables
@@ -21,6 +24,7 @@ public class GameState : MonoBehaviour {
 	private int ratSpawnInd;
 	private float staticRSR;
 
+    public RockPile rockPile;
 
 	// Use this for initialization
 	void Start () {
@@ -30,6 +34,9 @@ public class GameState : MonoBehaviour {
         staminaBackground.rectTransform.sizeDelta = new Vector2(playerController.staminaMax, 40);
         staminaBar.rectTransform.sizeDelta = new Vector2(playerController.stamina, 40);
 		NumRatsHeld.text = playerController.numRats.ToString ();
+        uRRPS.text = "Units of Rock Removed Per Second: " + rockPile.uRRPS.ToString();
+        numRatsDigging.text = "Number of Rats Digging: " + rockPile.numRatsDigging.ToString();
+        playerVisible.text = "Player visible: " + playerController.isVisible.ToString();
 		//Spawning rats initialization
 		ratSpawnLocations = GameObject.FindGameObjectsWithTag ("RatSpawn");
 		ratSpawnInd = Random.Range(0, ratSpawnLocations.Length);
@@ -45,6 +52,9 @@ public class GameState : MonoBehaviour {
 		countDown.text = ((int)TimeRemaining).ToString ();
         staminaBar.rectTransform.sizeDelta = new Vector2(playerController.stamina, 40);
 		NumRatsHeld.text = playerController.numRats.ToString ();
+        uRRPS.text = "Units of Rock Removed Per Second: " + rockPile.uRRPS.ToString();
+        numRatsDigging.text = "Number of Rats Digging: " + rockPile.numRatsDigging.ToString();
+        playerVisible.text = "Player visible: " + playerController.isVisible.ToString();
     }
 
 	void ratSpawn(){

@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour {
 	public float stamina;
 
     //visibility flag variable
-    public bool isVisible;
+    public bool isVisible = false;
 
 	//The game object that the player fires
 	public GameObject projectile;
@@ -22,9 +22,12 @@ public class PlayerController : MonoBehaviour {
 	private bool isCrouching;
 	public int numRats = 0;
 
+    private GameObject[] lights;
+
 	//Might come back and initialize all variables in Start
 	void Start() {
         stamina = staminaMax;
+        lights = GameObject.FindGameObjectsWithTag("MainLights");
 	}
 
 	// Update is called once per frame
@@ -85,6 +88,16 @@ public class PlayerController : MonoBehaviour {
         else if(!isSprinting && !Input.GetButton("Sprint"))
         {
             RefillStamina();
+        }
+
+        isVisible = false;
+        foreach (GameObject obj in lights)
+        {
+            LightToggle light = obj.GetComponent<LightToggle>();
+            if(light.playerInLight)
+            {
+                isVisible = true;
+            }
         }
 
 	}

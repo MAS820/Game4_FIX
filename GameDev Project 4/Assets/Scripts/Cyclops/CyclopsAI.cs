@@ -40,6 +40,9 @@ public class CyclopsAI : MonoBehaviour
     public GameObject[] CyclopsWaypoints;
     public float patrolSpeed = 2f;
 
+    //Use this to eat rats
+    public bool eat;
+    public float eatRate = 1.0f;
 
     void Start()
     {
@@ -71,6 +74,9 @@ public class CyclopsAI : MonoBehaviour
         wayPointIndex = 0;
         //Get the list of waypoint objects.
         wayPoints = GameObject.FindGameObjectsWithTag("CyclopsWaypoint");
+
+        //cyclops eating rats stuff
+        eat = false;
 
         StartCoroutine("FSM");
     }

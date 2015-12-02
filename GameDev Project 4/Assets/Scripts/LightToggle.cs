@@ -9,10 +9,11 @@ public class LightToggle : MonoBehaviour {
     public float lowIntensity = 1f;
     public float changeMargin = 0.2f;
     public float range = 20f;
+    public Light currentLight;
+    public bool playerInLight = false;
 
     //Local variables
     //Player and current light
-    private Light currentLight;
     private GameObject playerObject;
     private PlayerController playerController;
 
@@ -22,7 +23,6 @@ public class LightToggle : MonoBehaviour {
     private Vector3 pos_player;
     private Vector3 pos_light;
     private float distance;
-
    
 	void Start () {
         //Find reference to current light and player objects.
@@ -50,6 +50,29 @@ public class LightToggle : MonoBehaviour {
         PlayerWithinRadius(distance);
         toggleLamp(distance);
         
+        float dist = Vector3.Distance(playerController.transform.position, this.transform.position);
+        RaycastHit hit;
+        Vector3 rayDirection = (playerController.transform.position + new Vector3(0, 1, 0)) - this.transform.position;
+        if(currentLight.enabled)
+        {
+            if (Physics.Raycast(this.transform.position, rayDirection, out hit, range))
+            {
+                if (hit.transform.gameObject.tag == "Player")
+                {
+                    playerInLight = true;
+                }
+                else
+                {
+                    playerInLight = false;
+                }
+            }
+            Debug.DrawLine(this.transform.position, hit.point, Color.cyan, 3.0f);
+        }
+        else
+        {
+            playerInLight = false;
+        }
+        
 	}
     
     //Check player position if in range of lamp to toggle.
@@ -76,7 +99,7 @@ public class LightToggle : MonoBehaviour {
         if (dist <= currentLight.range && currentLight.enabled == true)
         {
             //flag player visible
-            playerController.isVisible = true;
+            //playerController.isVisible = true;
             //Debug.Log(playerController.isVisible);
             currentLight.intensity = Mathf.Lerp(currentLight.intensity, targetIntensity, fadeSpeed * Time.deltaTime);
             CheckTargetIntensity();
@@ -86,7 +109,7 @@ public class LightToggle : MonoBehaviour {
         {
             //flag invisible
             currentLight.intensity = Mathf.Lerp(currentLight.intensity, 1f, fadeSpeed * Time.deltaTime);
-            playerController.isVisible = false;
+            //playerController.isVisible = false;
             //Debug.Log(playerController.isVisible);
         }
 

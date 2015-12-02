@@ -11,6 +11,8 @@ TagManager:
   - Rat
   - RatSpawn
   - RatWaypoint
+  - MainLights
+  - RockPile
   layers:
   - Default
   - TransparentFX
