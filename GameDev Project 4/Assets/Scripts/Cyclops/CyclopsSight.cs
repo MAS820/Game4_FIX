@@ -2,7 +2,7 @@
 using System.Collections;
 
 //Still working on this one, will clean up.
-public class EnemySight : MonoBehaviour {
+public class CyclopsSight : MonoBehaviour {
     public float fieldOfViewAngle = 120f;
     public bool playerInSight;
     public bool gameOver;
@@ -11,9 +11,12 @@ public class EnemySight : MonoBehaviour {
     private CapsuleCollider col;
     private Animator anim;
     private GameObject player;
-    private GameObject enemy;
+    private GameObject cyclops;
     private Animator playerAnim;
     public Vector3 previousSighting;
+
+    private CharacterController cyclopsController;
+
     
 
     // Use this for initialization
@@ -23,9 +26,10 @@ public class EnemySight : MonoBehaviour {
         col = GetComponent<CapsuleCollider>();
         anim = GetComponent<Animator>();
         player = GameObject.Find("Player");
-        enemy = GameObject.Find("Enemy");
+        cyclops = GameObject.Find("Cyclops");
 
-
+        nav.updateRotation = true;
+        nav.updatePosition = true;
     }
 	
 	// Update is called once per frame
@@ -40,10 +44,12 @@ public class EnemySight : MonoBehaviour {
     {
         if (other.gameObject.tag == "Lamps")
         {
+            //nav.speed = 3.0f;
             Light current = other.gameObject.GetComponentInChildren<Light>();
             if (current.enabled)
             {
                 nav.destination = current.transform.position;
+              //  cyclopsController.Move(nav.desiredVelocity);
                 float dist = Vector3.Distance(transform.position, current.transform.position);
                 if (dist < 1)
                 {
