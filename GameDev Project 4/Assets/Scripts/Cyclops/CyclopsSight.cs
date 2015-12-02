@@ -3,7 +3,7 @@ using System.Collections;
 
 //Still working on this one, will clean up.
 public class CyclopsSight : MonoBehaviour {
-    public float fieldOfViewAngle = 120f;
+    public float fieldOfViewAngle = 190f;
     public bool playerInSight;
     public bool gameOver;
     Light currentLight;
@@ -42,7 +42,44 @@ public class CyclopsSight : MonoBehaviour {
 
     void OnTriggerStay (Collider other)
     {
-        if (other.gameObject.tag == "Lamps")
+        if (other.gameObject == player)
+        {
+            
+            playerInSight = false;
+            Debug.Log(playerInSight);
+            Vector3 direction = other.transform.position - transform.position;
+            float angle = Vector3.Angle(direction, transform.forward);
+            // Debug.Log(angle);
+            //Check front cone of view
+            if (angle < fieldOfViewAngle * 0.5f)
+            {
+                RaycastHit hit;
+                if (Physics.Raycast(transform.position + transform.up, direction.normalized, out hit, col.radius))
+                {
+                    if (hit.collider.gameObject == player)
+                    {
+                        //player is seen
+                        playerInSight = true;
+
+                        previousSighting = player.transform.position;
+
+                    }
+                }
+            }
+            else
+            {
+                if (Vector3.Distance(transform.position, player.transform.position) < 5) {
+                    playerInSight = true;
+                    previousSighting = player.transform.position;
+
+                }
+
+            }
+            //Add another small radius check around the cyclops so to agro player.
+             
+        }
+
+        else if (other.gameObject.tag == "Lamps" && !playerInSight)
         {
             //nav.speed = 3.0f;
             Light current = other.gameObject.GetComponentInChildren<Light>();
@@ -57,27 +94,7 @@ public class CyclopsSight : MonoBehaviour {
                 }
             }
         }
-        else if (other.gameObject == player)
-        {
-            playerInSight = false;
-            Vector3 direction = other.transform.position - transform.position;
-            float angle = Vector3.Angle(direction, transform.forward);
-           // Debug.Log(angle);
-            if (angle < fieldOfViewAngle * 0.5f)
-            {
-                RaycastHit hit;
-                if (Physics.Raycast(transform.position + transform.up, direction.normalized, out hit, col.radius))
-                {
-                    if (hit.collider.gameObject == player)
-                    {
-                        //player is seen
-                        playerInSight = true;
-                        previousSighting = player.transform.position;
-                        
-                    }
-                }
-            }
-        }
+
 
        /* else if (other.gameObject.CompareTag("Lamps") == true )
         {
@@ -89,7 +106,8 @@ public class CyclopsSight : MonoBehaviour {
     {
         if (other.gameObject == player)
         {
-            playerInSight = false;
+            playerInSight = true;
+            
         }
     }
 }

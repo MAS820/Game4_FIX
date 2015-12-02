@@ -4,7 +4,7 @@ using System.Collections;
 public class CyclopsAI : MonoBehaviour
 {
     //Editables //some variables will be used later for animation and navigational mesh
-    public float chaseSpeed = 5f;
+    public float chaseSpeed = 1f;
     public float chaseWaitTime = 4f;
     public float patrolWaitTime = 1f;
 
@@ -54,11 +54,11 @@ public class CyclopsAI : MonoBehaviour
 
         //Nav Mesh agent sets up the mesh that our characters can move on.
         nav = GetComponent<NavMeshAgent>();
-        //nav.updatePosition = true;
-        //nav.updateRotation = true;
+        nav.updatePosition = true;
+        nav.updateRotation = true;
         alive = true;
         //autobraking causes the character to pause before each waypoint
-         nav.autoBraking = false;
+         //nav.autoBraking = false;
 
         //char references
         player = GameObject.Find("Player");
@@ -99,7 +99,7 @@ public class CyclopsAI : MonoBehaviour
         //enemyRenderer.material.color = new Color(0.5f, 0.3f, 0.3f);
         nav.speed = chaseSpeed;
         //enemyRenderer.material.color = Color.red;
-
+      //  cyclops.transform.Rotate();
         //Get the position of the player. Get the delta vector between player / enemy
         Vector3 sightingDeltaPos = cyclopsSight.previousSighting - transform.position;
         float dist = Vector3.Distance(cyclopsSight.previousSighting, transform.position);
@@ -107,12 +107,13 @@ public class CyclopsAI : MonoBehaviour
         if (dist <= 6)
         {
             //Tell enemy to walk to player location
-           // nav.SetDestination(waypoint);
-            nav.destination = waypoint;
+           //nav.SetDestination(cyclopsSight.previousSighting);
+            nav.destination = cyclopsSight.previousSighting;
             //cyclopsController.Move(nav.desiredVelocity);
         }
-        else
+        else 
         {
+            Debug.Log(dist);
             cyclopsSight.playerInSight = false;
         }
         //If we're nearing the destination, add to chase timer.
@@ -134,25 +135,33 @@ public class CyclopsAI : MonoBehaviour
     void Patrolling()
     {
         //enemyRenderer.material.color = Color.green;
-
-        //Get the position of the first waypoint
-        waypoint = wayPoints[wayPointIndex].transform.position;
-        nav.speed = patrolSpeed;
-        if (nav.remainingDistance < nav.stoppingDistance)
+        if (cyclopsSight.playerInSight)
         {
-            //nav.SetDestination(waypoint);
-            nav.destination = waypoint;
-            //cyclopsController.Move(nav.desiredVelocity);
+            state = CyclopsAI.State.CHASING;
+        }
+        else
+        {
 
-            //If we reach the end of the list, start over
-            if (wayPointIndex == wayPoints.Length - 1)
+            //Get the position of the first waypoint
+            waypoint = wayPoints[wayPointIndex].transform.position;
+            nav.speed = patrolSpeed;
+            //float dist = Vector3.Distance(waypoint, transform.position);
+            if (nav.remainingDistance < nav.stoppingDistance)
             {
-                wayPointIndex = 0;
-            }
-            //Otherwise, we go through the list.
-            else
-            {
-                wayPointIndex++;
+                nav.SetDestination(waypoint);
+                // nav.destination = waypoint;
+                cyclopsController.Move(nav.desiredVelocity);
+
+                //If we reach the end of the list, start over
+                if (wayPointIndex == wayPoints.Length - 1)
+                {
+                    wayPointIndex = 0;
+                }
+                //Otherwise, we go through the list.
+                else
+                {
+                    wayPointIndex++;
+                }
             }
         }
     }
@@ -165,10 +174,10 @@ public class CyclopsAI : MonoBehaviour
             {
                 state = CyclopsAI.State.PATROLLING;
             }
-            else if (cyclopsSight.playerInSight)
+           /* else if (cyclopsSight.playerInSight)
             {
-                //state = CyclopsAI.State.CHASING;
-            }
+                state = CyclopsAI.State.CHASING;
+            }*/
         }
 
 
