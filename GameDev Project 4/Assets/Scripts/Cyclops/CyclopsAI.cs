@@ -4,27 +4,29 @@ using System.Collections;
 public class CyclopsAI : MonoBehaviour
 {
     //Editables //some variables will be used later for animation and navigational mesh
-    public float chaseSpeed = 1f;
+    public float patrolSpeed = 4f;
+    public float chaseSpeed = 2.9f;
     public float chaseWaitTime = 4f;
     public float patrolWaitTime = 1f;
+    private float patrolTimer;
+    private float chaseTimer;
 
+    private NavMeshAgent nav;
     public Vector3[] patrolWayPoints;
     public GameObject[] wayPoints;
-
     public Vector3 waypoint;
+    private int wayPointIndex;
+
+    private GameObject cyclops;
     private CyclopsSight cyclopsSight;
-    private NavMeshAgent nav;
+    private CharacterController cyclopsController;
+
     private GameObject player;
     private Transform playerTransform;
-    private GameObject cyclops;
     //  private Renderer enemyRenderer;
     // private GameObject GS;
     //  private GameState GSscript;
-    private CharacterController cyclopsController;
-    private float patrolTimer;
-    private float chaseTimer;
     private bool alive;
-    private int wayPointIndex;
     // Use this for initialization
     public enum State
     {
@@ -37,8 +39,6 @@ public class CyclopsAI : MonoBehaviour
 
     //Patrolling var
     public Material MatCyclopsPatrolling;
-    public GameObject[] CyclopsWaypoints;
-    public float patrolSpeed = 4f;
 
     //Use this to eat rats
     public bool eat;
@@ -90,6 +90,7 @@ public class CyclopsAI : MonoBehaviour
                     Patrolling();
                     break;
                 case State.NEUTRAL:
+                    Neutral();
                     break;
                 case State.CHASING:
                     Chasing();
@@ -99,6 +100,15 @@ public class CyclopsAI : MonoBehaviour
         }
     }
     // Update is called once per frame
+    void Neutral()
+    {
+
+    }
+    void GoToRockPile()
+    {
+        nav.speed = chaseSpeed;
+        //nav.destination = rockpile.transform.position; 
+    }
     void Chasing()
     {
         //set speed;
@@ -113,13 +123,10 @@ public class CyclopsAI : MonoBehaviour
         if (dist <= 6)
         {
             //Tell enemy to walk to player location
-           //nav.SetDestination(cyclopsSight.previousSighting);
             nav.destination = cyclopsSight.previousSighting;
-            //cyclopsController.Move(nav.desiredVelocity);
         }
         else 
         {
-            Debug.Log(dist);
             cyclopsSight.playerInSight = false;
         }
         //If we're nearing the destination, add to chase timer.
@@ -154,9 +161,7 @@ public class CyclopsAI : MonoBehaviour
             //float dist = Vector3.Distance(waypoint, transform.position);
             if (nav.remainingDistance < nav.stoppingDistance)
             {
-                nav.SetDestination(waypoint);
-                // nav.destination = waypoint;
-                cyclopsController.Move(nav.desiredVelocity);
+                nav.destination = waypoint;
 
                 //If we reach the end of the list, start over
                 if (wayPointIndex == wayPoints.Length - 1)
@@ -180,14 +185,7 @@ public class CyclopsAI : MonoBehaviour
             {
                 state = CyclopsAI.State.PATROLLING;
             }
-           /* else if (cyclopsSight.playerInSight)
-            {
-                state = CyclopsAI.State.CHASING;
-            }*/
         }
-
-
-
     }
 }
 
