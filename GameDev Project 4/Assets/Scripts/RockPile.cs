@@ -31,9 +31,9 @@ public class RockPile : MonoBehaviour {
             numRatsDigging += playerController.numRats;
             playerController.numRats = 0;
         }
-        if(other.gameObject.tag == "Cyclops" && cyclops.eat)
+        if(other.gameObject.tag == "Cyclops" && (cyclops.state == CyclopsAI.State.PATROLLING || cyclops.state == CyclopsAI.State.ENRAGED))
         {
-            numRatsDigging -= cyclops.eatRate * Time.deltaTime;
+            cyclops.state = CyclopsAI.State.EATING;
         }
     }
 }

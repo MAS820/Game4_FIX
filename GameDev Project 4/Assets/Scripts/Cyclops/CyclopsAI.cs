@@ -32,7 +32,9 @@ public class CyclopsAI : MonoBehaviour
     {
         CHASING,
         NEUTRAL,
-        PATROLLING
+        PATROLLING,
+        EATING,
+        ENRAGED
     }
     public State state;
     public Renderer r;
@@ -41,8 +43,9 @@ public class CyclopsAI : MonoBehaviour
     public Material MatCyclopsPatrolling;
 
     //Use this to eat rats
-    public bool eat;
     public float eatRate = 1.0f;
+    public RockPile rockPile;
+    private float playerLastSeen;
 
     void Start()
     {
@@ -75,9 +78,6 @@ public class CyclopsAI : MonoBehaviour
         //Get the list of waypoint objects.
         wayPoints = GameObject.FindGameObjectsWithTag("CyclopsWaypoint");
 
-        //cyclops eating rats stuff
-        eat = false;
-
         StartCoroutine("FSM");
     }
     IEnumerator FSM()
@@ -94,6 +94,12 @@ public class CyclopsAI : MonoBehaviour
                     break;
                 case State.CHASING:
                     Chasing();
+                    break;
+                case State.EATING:
+                    Eating();
+                    break;
+                case State.ENRAGED:
+                    Enraged();
                     break;
             }
             yield return null;
@@ -151,6 +157,7 @@ public class CyclopsAI : MonoBehaviour
         if (cyclopsSight.playerInSight)
         {
             state = CyclopsAI.State.CHASING;
+            playerLastSeen = Time.time;
         }
         else
         {
@@ -174,7 +181,22 @@ public class CyclopsAI : MonoBehaviour
                     wayPointIndex++;
                 }
             }
+
+            if(Time.time - playerLastSeen > 10.0f)
+            {
+                state = CyclopsAI.State.ENRAGED;
+            }
         }
+    }
+
+    void Enraged()
+    {
+        GoToRockPile();
+    }
+
+    void Eating()
+    {
+        rockPile.numRatsDigging -= eatRate * Time.deltaTime;
     }
 
     void Update()
