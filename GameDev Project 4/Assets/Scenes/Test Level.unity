@@ -84,7 +84,7 @@ NavMeshSettings:
     minRegionArea: 2
     cellSize: .166666672
     manualCellSize: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: 9e08c1bda31764a4b91fff3a4784889a, type: 2}
 --- !u!1001 &40297739
 Prefab:
   m_ObjectHideFlags: 0
@@ -237,7 +237,7 @@ GameObject:
   - 4: {fileID: 295582365}
   m_Layer: 0
   m_Name: CyclopsWaypoints
-  m_TagString: Untagged
+  m_TagString: CyclopsWaypoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
