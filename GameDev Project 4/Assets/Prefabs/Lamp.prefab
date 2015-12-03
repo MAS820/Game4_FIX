@@ -141,6 +141,9 @@ MonoBehaviour:
   lowIntensity: .5
   changeMargin: .200000003
   range: 10
+  currentLight: {fileID: 0}
+  playerInLight: 0
+  distance: 0
 --- !u!136 &13697718
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -167,7 +170,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_TagString
-      value: Lamps
+      value: MainLights
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

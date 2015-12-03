@@ -3,7 +3,17 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - GameState
+  - Cyclops
+  - Lamps
+  - Projectile
+  - Rat
+  - RatSpawn
+  - RatWaypoint
+  - RockPile
+  - CyclopsWaypoint
+  - MainLights
   layers:
   - Default
   - TransparentFX

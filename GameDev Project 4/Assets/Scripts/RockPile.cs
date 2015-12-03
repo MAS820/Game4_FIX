@@ -27,6 +27,7 @@ public class RockPile : MonoBehaviour {
     {
         if(other.gameObject.tag == "Player" && Input.GetKeyDown(KeyCode.E))
         {
+			playerController = other.GetComponent <PlayerController> ();
             print("placing rats");
             numRatsDigging += playerController.numRats;
             playerController.numRats = 0;

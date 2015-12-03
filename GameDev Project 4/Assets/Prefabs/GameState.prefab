@@ -44,12 +44,17 @@ MonoBehaviour:
   staminaBackground: {fileID: 0}
   staminaBar: {fileID: 0}
   NumRatsHeld: {fileID: 0}
+  uRRPS: {fileID: 0}
+  numRatsDigging: {fileID: 0}
+  playerVisible: {fileID: 0}
+  visibilityAmount: {fileID: 0}
   playerController: {fileID: 0}
   ratSpawnLocations: []
   ratSpawnRate: 3
   maxActiveRats: 3
   Rat: {fileID: 168756, guid: 140a5ec52ab3ec5428b248a670b6b05b, type: 2}
   numActiveRats: 0
+  rockPile: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

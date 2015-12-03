@@ -109,6 +109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 176136dcd9f7a80498e1860af92d8535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  patrolSpeed: 2
   chaseSpeed: 5
   chaseWaitTime: 5
   patrolWaitTime: 1
@@ -118,8 +119,8 @@ MonoBehaviour:
   state: 0
   r: {fileID: 0}
   MatCyclopsPatrolling: {fileID: 0}
-  CyclopsWaypoints: []
-  patrolSpeed: 2
+  eatRate: 1
+  rockPile: {fileID: 0}
 --- !u!136 &13686302
 CapsuleCollider:
   m_ObjectHideFlags: 1
