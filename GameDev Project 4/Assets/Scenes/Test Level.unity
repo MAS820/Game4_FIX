@@ -227,6 +227,33 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 380880407}
   m_Script: {fileID: 11500000, guid: 176136dcd9f7a80498e1860af92d8535, type: 3}
+--- !u!1 &295582364
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 171492, guid: 4180863329a585e43909bdbce0948765, type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 295582365}
+  m_Layer: 0
+  m_Name: CyclopsWaypoints
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &295582365
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 479766, guid: 4180863329a585e43909bdbce0948765, type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 295582364}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.59329414, y: 5.53123188, z: 19.9015617}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
 --- !u!114 &345124810 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 11453766, guid: bdb5ff0ec3b3bac43b6f4d97c179fd08,
@@ -346,7 +373,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
 --- !u!1001 &590276045
 Prefab:
   m_ObjectHideFlags: 0
