@@ -13,6 +13,7 @@ public class GameState : MonoBehaviour {
     public Text uRRPS;
     public Text numRatsDigging;
     public Text playerVisible;
+    public Text visibilityAmount;
     public PlayerController playerController;
 
 	//Spawning rats variables
@@ -37,6 +38,7 @@ public class GameState : MonoBehaviour {
         uRRPS.text = "Units of Rock Removed Per Second: " + rockPile.uRRPS.ToString();
         numRatsDigging.text = "Number of Rats Digging: " + rockPile.numRatsDigging.ToString();
         playerVisible.text = "Player visible: " + playerController.isVisible.ToString();
+        visibilityAmount.text = "Visibility Amount: " + playerController.visibilityAmount.ToString();
 		//Spawning rats initialization
 		ratSpawnLocations = GameObject.FindGameObjectsWithTag ("RatSpawn");
 		ratSpawnInd = Random.Range(0, ratSpawnLocations.Length);
@@ -55,6 +57,7 @@ public class GameState : MonoBehaviour {
         uRRPS.text = "Units of Rock Removed Per Second: " + rockPile.uRRPS.ToString();
         numRatsDigging.text = "Number of Rats Digging: " + rockPile.numRatsDigging.ToString();
         playerVisible.text = "Player visible: " + playerController.isVisible.ToString();
+        visibilityAmount.text = "Visibility Amount: " + playerController.visibilityAmount.ToString();
     }
 
 	void ratSpawn(){

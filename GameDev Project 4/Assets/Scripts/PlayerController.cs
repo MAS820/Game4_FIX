@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour {
 
     //visibility flag variable
     public bool isVisible = false;
+    public float visibilityAmount = 0.0f;
+    public float visibilityThreshold = 0.3f;
 
 	//The game object that the player fires
 	public GameObject projectile;
@@ -89,15 +91,31 @@ public class PlayerController : MonoBehaviour {
         {
             RefillStamina();
         }
-
-        isVisible = false;
+        
+        visibilityAmount = 0.0f;
         foreach (GameObject obj in lights)
         {
             LightToggle light = obj.GetComponent<LightToggle>();
             if(light.playerInLight)
             {
-                isVisible = true;
+                if(isCrouching)
+                {
+                    visibilityAmount += (light.currentLight.intensity * 1 / (light.distance + 0.0000001f)) / 2.0f;
+                }
+                else
+                {
+                    visibilityAmount += light.currentLight.intensity * 1 / (light.distance + 0.0000001f);
+                }
             }
+        }
+
+        if(visibilityAmount >= visibilityThreshold)
+        {
+            isVisible = true;
+        }
+        else
+        {
+            isVisible = false;
         }
 
 	}

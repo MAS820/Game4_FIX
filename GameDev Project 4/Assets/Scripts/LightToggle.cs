@@ -22,7 +22,9 @@ public class LightToggle : MonoBehaviour {
     //Vectors and distance
     private Vector3 pos_player;
     private Vector3 pos_light;
-    private float distance;
+    public float distance;
+
+    private GameObject obj;
    
 	void Start () {
         //Find reference to current light and player objects.
@@ -33,6 +35,7 @@ public class LightToggle : MonoBehaviour {
         currentLight.intensity = 1.5f;
         currentLight.range = range;
         targetIntensity = highIntensity;
+        obj = GameObject.FindGameObjectWithTag("MainCamera");
     }
 
     // Update is called once per frame
@@ -50,9 +53,10 @@ public class LightToggle : MonoBehaviour {
         PlayerWithinRadius(distance);
         toggleLamp(distance);
         
-        float dist = Vector3.Distance(playerController.transform.position, this.transform.position);
         RaycastHit hit;
-        Vector3 rayDirection = (playerController.transform.position + new Vector3(0, 1, 0)) - this.transform.position;
+        Camera fpcam = obj.GetComponent<Camera>();
+        //Vector3 rayDirection2 = (playerController.transform.position) - this.transform.position;
+        Vector3 rayDirection = fpcam.transform.position - this.transform.position;
         if(currentLight.enabled)
         {
             if (Physics.Raycast(this.transform.position, rayDirection, out hit, range))
@@ -66,7 +70,7 @@ public class LightToggle : MonoBehaviour {
                     playerInLight = false;
                 }
             }
-            Debug.DrawLine(this.transform.position, hit.point, Color.cyan, 3.0f);
+            Debug.DrawLine(this.transform.position, hit.point, Color.cyan, 1.0f);
         }
         else
         {

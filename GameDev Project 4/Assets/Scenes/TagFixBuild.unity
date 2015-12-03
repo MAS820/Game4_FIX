@@ -440,6 +440,10 @@ Prefab:
       propertyPath: Rat
       value: 
       objectReference: {fileID: 1969190545}
+    - target: {fileID: 11482418, guid: db10f57845783b846a0b44ba5daa51a4, type: 2}
+      propertyPath: visibilityAmount
+      value: 
+      objectReference: {fileID: 1734866981}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: db10f57845783b846a0b44ba5daa51a4, type: 2}
   m_IsPrefabParent: 0
@@ -502,7 +506,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 175972, guid: 2c8e54992acd77d4fa1c526127933e16, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2c8e54992acd77d4fa1c526127933e16, type: 2}
@@ -833,6 +837,12 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 467270, guid: 2f2a625adaa8a2e4d93ce65b13be50ee, type: 2}
   m_PrefabInternal: {fileID: 1639605965}
+--- !u!114 &1734866981 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11427426, guid: 226c513dfb3b7ec409427fa868d9c316,
+    type: 2}
+  m_PrefabInternal: {fileID: 1461451728}
+  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!114 &1735413425 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 11414376, guid: 226c513dfb3b7ec409427fa868d9c316,
