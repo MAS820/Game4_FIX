@@ -132,6 +132,14 @@ Prefab:
       propertyPath: m_StoppingDistance
       value: .00999999978
       objectReference: {fileID: 0}
+    - target: {fileID: 11455530, guid: 85472b58705ad6f4eb92f146c7485dcc, type: 2}
+      propertyPath: chaseSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11455530, guid: 85472b58705ad6f4eb92f146c7485dcc, type: 2}
+      propertyPath: state
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 85472b58705ad6f4eb92f146c7485dcc, type: 2}
   m_IsPrefabParent: 0
@@ -141,6 +149,24 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1967866668}
   m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+--- !u!114 &234584972 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11483126, guid: 226c513dfb3b7ec409427fa868d9c316,
+    type: 2}
+  m_PrefabInternal: {fileID: 1967866668}
+  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+--- !u!114 &463403798 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11431014, guid: 226c513dfb3b7ec409427fa868d9c316,
+    type: 2}
+  m_PrefabInternal: {fileID: 1967866668}
+  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+--- !u!114 &495126388 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11414376, guid: 226c513dfb3b7ec409427fa868d9c316,
+    type: 2}
+  m_PrefabInternal: {fileID: 1967866668}
+  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!114 &504089986 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 11449726, guid: 226c513dfb3b7ec409427fa868d9c316,
@@ -695,6 +721,18 @@ Prefab:
       propertyPath: NumRatsHeld
       value: 
       objectReference: {fileID: 504089986}
+    - target: {fileID: 11482418, guid: db10f57845783b846a0b44ba5daa51a4, type: 2}
+      propertyPath: uRRPS
+      value: 
+      objectReference: {fileID: 234584972}
+    - target: {fileID: 11482418, guid: db10f57845783b846a0b44ba5daa51a4, type: 2}
+      propertyPath: numRatsDigging
+      value: 
+      objectReference: {fileID: 463403798}
+    - target: {fileID: 11482418, guid: db10f57845783b846a0b44ba5daa51a4, type: 2}
+      propertyPath: playerVisible
+      value: 
+      objectReference: {fileID: 495126388}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: db10f57845783b846a0b44ba5daa51a4, type: 2}
   m_IsPrefabParent: 0

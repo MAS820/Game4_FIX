@@ -113,7 +113,7 @@ public class CyclopsAI : MonoBehaviour
     void GoToRockPile()
     {
         nav.speed = chaseSpeed;
-        //nav.destination = rockpile.transform.position; 
+        nav.destination = rockPile.transform.position; 
     }
     void Chasing()
     {
@@ -138,7 +138,7 @@ public class CyclopsAI : MonoBehaviour
         //If we're nearing the destination, add to chase timer.
         /*if (nav.remainingDistance < nav.stoppingDistance)
         {
-            chaseTimer += Time.deltaTime;
+            chaseds= Time.deltaTime;
             //Chasing cooldown, ensures that monster continues moving
             if (chaseTimer >= chaseWaitTime)
             {
@@ -196,7 +196,10 @@ public class CyclopsAI : MonoBehaviour
 
     void Eating()
     {
-        rockPile.numRatsDigging -= eatRate * Time.deltaTime;
+        if (rockPile.numRatsDigging > 0)
+        {
+            rockPile.numRatsDigging -= eatRate * Time.deltaTime;
+        }
     }
 
     void Update()
