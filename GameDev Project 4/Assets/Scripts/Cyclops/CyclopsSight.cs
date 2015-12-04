@@ -44,7 +44,7 @@ public class CyclopsSight : MonoBehaviour {
     {
         if (other.gameObject == player)
         {
-            
+
             playerInSight = false;
             Debug.Log(playerInSight);
             Vector3 direction = other.transform.position - transform.position;
@@ -68,7 +68,8 @@ public class CyclopsSight : MonoBehaviour {
             }
             else
             {
-                if (Vector3.Distance(transform.position, player.transform.position) < 5) {
+                if (Vector3.Distance(transform.position, player.transform.position) < 5)
+                {
                     playerInSight = true;
                     previousSighting = player.transform.position;
 
@@ -76,27 +77,26 @@ public class CyclopsSight : MonoBehaviour {
 
             }
             //Add another small radius check around the cyclops so to agro player.
-             
+
         }
 
         else if (other.gameObject.tag == "Lamps")
         {
-            //nav.speed = 3.0f;
-            Light current = other.gameObject.GetComponentInChildren<Light>();
-            if (current.enabled)
+            if (!playerInSight)
             {
-                nav.destination = current.transform.position;
-              //  cyclopsController.Move(nav.desiredVelocity);
-                float dist = Vector3.Distance(transform.position, current.transform.position);
-                if (dist < 1.5)
+                Light current = other.gameObject.GetComponentInChildren<Light>();
+                if (current.enabled)
                 {
-                    current.enabled = false;
-                    Debug.Log("what");
-                   // nav.destination = player.transform.position;
-                   // CyclopsAI.setState(CyclopsAI.State.PATROLLING);
+                    nav.destination = current.transform.position;
+
+                    float dist = Vector3.Distance(transform.position, current.transform.position);
+                    if (dist < 1.5)
+                    {
+                        current.enabled = false;
+                    }
                 }
+
             }
-            
         }
     }
     void OnTriggerExit (Collider other)

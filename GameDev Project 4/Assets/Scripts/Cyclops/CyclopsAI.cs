@@ -182,11 +182,19 @@ public class CyclopsAI : MonoBehaviour
                     wayPointIndex++;
                 }
             }
-
-           /* if(Time.time - playerLastSeen > 10.0f && cyclopsSight.playerInSight == false)
+            //basic investigation state. checks the spot of player last seen if its been a while.
+            if (Time.time - playerLastSeen > 10.0f && cyclopsSight.playerInSight == false)
             {
-                state = CyclopsAI.State.ENRAGED;
-            }*/
+                //state = CyclopsAI.State.ENRAGED;
+                nav.destination = cyclopsSight.previousSighting;
+            }
+            else if (Time.time - playerLastSeen > 10.0f && cyclopsSight.playerInSight == false)
+            {
+                if (rockPile.numRatsDigging > 30)
+                {
+                    state = CyclopsAI.State.ENRAGED;
+                }
+            }
         }
     }
 
@@ -200,6 +208,11 @@ public class CyclopsAI : MonoBehaviour
         if (rockPile.numRatsDigging > 0)
         {
             rockPile.numRatsDigging -= eatRate * Time.deltaTime;
+        }
+        else
+        {
+           state = CyclopsAI.State.PATROLLING;
+
         }
     }
 

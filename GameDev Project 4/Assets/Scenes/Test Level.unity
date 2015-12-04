@@ -254,6 +254,8 @@ Transform:
   m_Children:
   - {fileID: 726936310}
   - {fileID: 1111627343}
+  - {fileID: 1415444570}
+  - {fileID: 838462678}
   m_Father: {fileID: 0}
   m_RootOrder: 11
 --- !u!114 &345124810 stripped
@@ -315,7 +317,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 194034, guid: 85472b58705ad6f4eb92f146c7485dcc, type: 2}
       propertyPath: m_StaticEditorFlags
-      value: 4294967295
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 13686302, guid: 85472b58705ad6f4eb92f146c7485dcc, type: 2}
       propertyPath: m_Radius
@@ -471,6 +473,33 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1065448933}
   m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+--- !u!1 &838462677
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 171492, guid: 4180863329a585e43909bdbce0948765, type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 838462678}
+  m_Layer: 0
+  m_Name: CyclopsWaypoints (4)
+  m_TagString: CyclopsWaypoint
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &838462678
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 479766, guid: 4180863329a585e43909bdbce0948765, type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 838462677}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5.65999985, y: 0, z: 6.13999939}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 295582365}
+  m_RootOrder: 3
 --- !u!1001 &997597402
 Prefab:
   m_ObjectHideFlags: 0
@@ -686,6 +715,33 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1790870002}
   m_Script: {fileID: 11500000, guid: 64c2e7e1cfa9e2544993d5ef657e2b9c, type: 3}
+--- !u!1 &1415444569
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 171492, guid: 4180863329a585e43909bdbce0948765, type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1415444570}
+  m_Layer: 0
+  m_Name: CyclopsWaypoints (3)
+  m_TagString: CyclopsWaypoint
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1415444570
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 479766, guid: 4180863329a585e43909bdbce0948765, type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1415444569}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.56999993, y: 0, z: 6.13999987}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 295582365}
+  m_RootOrder: 2
 --- !u!114 &1436956690 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 11494810, guid: 226c513dfb3b7ec409427fa868d9c316,
