@@ -38,7 +38,6 @@ public class RatAI : MonoBehaviour {
 
 	//TRAPPED variables
 	public Material MatRatTrapped;
-	public Renderer rend;
 	public float trappedTimer = 5.0f;
 
 	Light lightComp;
@@ -51,8 +50,6 @@ public class RatAI : MonoBehaviour {
 		Player = GameObject.FindGameObjectWithTag ("Player");
 		PlayerCon = Player.GetComponent<PlayerController> ();
 		PlayerTransform = Player.GetComponent<Transform> ();
-
-		rend = GetComponent<Renderer> ();
 
 		ratController = GetComponent<CharacterController>();
 		nav = GetComponent<NavMeshAgent> ();
@@ -98,7 +95,6 @@ public class RatAI : MonoBehaviour {
 
 	void Wonder(){
 
-		rend.material = MatRatWonder;
 		nav.speed = wonderSpeed;
 
 		//if the light is active then wonder to it
@@ -122,7 +118,6 @@ public class RatAI : MonoBehaviour {
 	void Idle(){
 
 		nav.Move (Vector3.zero);
-		rend.material = MatRatIdle;
 
 		idleTimer -= Time.deltaTime;
 		if (idleTimer <= 0.0f) {
@@ -133,7 +128,6 @@ public class RatAI : MonoBehaviour {
 	void Trapped(){
 
 		nav.Move (Vector3.zero);
-		rend.material = MatRatTrapped;
 
 		trappedTimer -= Time.deltaTime;
 		if (trappedTimer <= 0.0f) {
@@ -142,8 +136,6 @@ public class RatAI : MonoBehaviour {
 	}
 
 	void Flee(){
-
-		rend.material = MatRatFlee;
 
 		nav.speed = fleeSpeed;
 		nav.SetDestination (fleeLocation);

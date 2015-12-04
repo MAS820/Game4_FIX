@@ -699,6 +699,10 @@ Prefab:
       propertyPath: rockPile
       value: 
       objectReference: {fileID: 784913407}
+    - target: {fileID: 11482418, guid: db10f57845783b846a0b44ba5daa51a4, type: 2}
+      propertyPath: Rat
+      value: 
+      objectReference: {fileID: 170480, guid: b1148675a15da3742add7365dfaa92d3, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: db10f57845783b846a0b44ba5daa51a4, type: 2}
   m_IsPrefabParent: 0
