@@ -14,7 +14,7 @@ public class CyclopsSight : MonoBehaviour {
     private GameObject cyclops;
     private Animator playerAnim;
     public Vector3 previousSighting;
-
+    public CyclopsAI cyclopsAI;
     private CharacterController cyclopsController;
 
     
@@ -79,7 +79,7 @@ public class CyclopsSight : MonoBehaviour {
              
         }
 
-        else if (other.gameObject.tag == "Lamps" && !playerInSight)
+        else if (other.gameObject.tag == "Lamps")
         {
             //nav.speed = 3.0f;
             Light current = other.gameObject.GetComponentInChildren<Light>();
@@ -88,19 +88,16 @@ public class CyclopsSight : MonoBehaviour {
                 nav.destination = current.transform.position;
               //  cyclopsController.Move(nav.desiredVelocity);
                 float dist = Vector3.Distance(transform.position, current.transform.position);
-                if (dist < 1)
+                if (dist < 1.5)
                 {
                     current.enabled = false;
+                    Debug.Log("what");
+                   // nav.destination = player.transform.position;
+                   // CyclopsAI.setState(CyclopsAI.State.PATROLLING);
                 }
             }
+            
         }
-
-
-       /* else if (other.gameObject.CompareTag("Lamps") == true )
-        {
-            other.gameObject.GetComponent<Light>().enabled = false;
-
-        }*/
     }
     void OnTriggerExit (Collider other)
     {

@@ -110,6 +110,7 @@ public class CyclopsAI : MonoBehaviour
     {
 
     }
+
     void GoToRockPile()
     {
         nav.speed = chaseSpeed;
@@ -126,10 +127,10 @@ public class CyclopsAI : MonoBehaviour
         Vector3 sightingDeltaPos = cyclopsSight.previousSighting - transform.position;
         float dist = Vector3.Distance(cyclopsSight.previousSighting, transform.position);
         //Get the magnitude of the vector (distance)
-        if (dist <= 6)
+        if (dist <= 6 && cyclopsSight.playerInSight == true)
         {
             //Tell enemy to walk to player location
-            nav.destination = cyclopsSight.previousSighting;
+            nav.destination = player.transform.position;
         }
         else 
         {
@@ -182,10 +183,10 @@ public class CyclopsAI : MonoBehaviour
                 }
             }
 
-            if(Time.time - playerLastSeen > 10.0f)
+           /* if(Time.time - playerLastSeen > 10.0f && cyclopsSight.playerInSight == false)
             {
                 state = CyclopsAI.State.ENRAGED;
-            }
+            }*/
         }
     }
 
