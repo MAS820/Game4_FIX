@@ -40,6 +40,8 @@ public class RatAI : MonoBehaviour {
 	public Material MatRatTrapped;
 	public Renderer rend;
 	public float trappedTimer = 5.0f;
+
+	Light lightComp;
 	
 	// Use this for initialization
 	void Start () {
@@ -57,10 +59,13 @@ public class RatAI : MonoBehaviour {
 		nav.updatePosition = true;
 		//use nav map for rotation, should be changed to use an animator at somepoint
 		nav.updateRotation = true;
+		nav.angularSpeed = 100;
 		alive = true;
-		ratWaypoint = GameObject.FindGameObjectsWithTag ("RatWaypoint");
+		ratWaypoint = GameObject.FindGameObjectsWithTag ("Lamps");
 		ratWaypointIndex = Random.Range (0, ratWaypoint.Length);
 		fleeLocation = this.transform.position;
+
+		lightComp = ratWaypoint [ratWaypointIndex].GetComponentInChildren<Light> ();
 
 		state = RatAI.State.WONDER;
 
@@ -94,20 +99,29 @@ public class RatAI : MonoBehaviour {
 	void Wonder(){
 
 		rend.material = MatRatWonder;
-
 		nav.speed = wonderSpeed;
-		if (Vector3.Distance (this.transform.position, ratWaypoint [ratWaypointIndex].transform.position) >= 2) {
-			nav.SetDestination (ratWaypoint [ratWaypointIndex].transform.position);
-			ratController.Move (nav.desiredVelocity);
-		} else if (Vector3.Distance (this.transform.position, ratWaypoint [ratWaypointIndex].transform.position) <= 2) {
-			state = RatAI.State.IDLE;	//If the rat is close to it's target destination, switch to IDLE
+
+		//if the light is active then wonder to it
+		//else randomly choose a new active light to walk to
+		if (lightComp.enabled) {
+
+			if (Vector3.Distance (this.transform.position, ratWaypoint [ratWaypointIndex].transform.position) >= (lightComp.range / 2)) {
+				nav.SetDestination (ratWaypoint [ratWaypointIndex].transform.position);
+				nav.Move (nav.desiredVelocity);
+			} else if (Vector3.Distance (this.transform.position, ratWaypoint [ratWaypointIndex].transform.position) <= (lightComp.range / 2)) {
+				state = RatAI.State.IDLE;	//If the rat is close to it's target destination, switch to IDLE
+			} else {
+				nav.Move (Vector3.zero);
+			}
 		} else {
-			ratController.Move (Vector3.zero);
+			ratWaypointIndex = Random.Range (0, ratWaypoint.Length);
+			lightComp = ratWaypoint [ratWaypointIndex].GetComponentInChildren <Light> ();
 		}
 	}
 
 	void Idle(){
 
+		nav.Move (Vector3.zero);
 		rend.material = MatRatIdle;
 
 		idleTimer -= Time.deltaTime;
@@ -118,6 +132,7 @@ public class RatAI : MonoBehaviour {
 
 	void Trapped(){
 
+		nav.Move (Vector3.zero);
 		rend.material = MatRatTrapped;
 
 		trappedTimer -= Time.deltaTime;
@@ -132,7 +147,7 @@ public class RatAI : MonoBehaviour {
 
 		nav.speed = fleeSpeed;
 		nav.SetDestination (fleeLocation);
-		ratController.Move (nav.desiredVelocity);
+		nav.Move (nav.desiredVelocity);
 
 		if (Vector3.Distance (this.transform.position, fleeLocation) <= 2) {
 			GSscript.subRat();
