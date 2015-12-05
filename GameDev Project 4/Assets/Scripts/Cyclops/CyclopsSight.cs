@@ -82,21 +82,25 @@ public class CyclopsSight : MonoBehaviour {
 
         else if (other.gameObject.tag == "Lamps")
         {
-            if (!playerInSight)
-            {
-                Light current = other.gameObject.GetComponentInChildren<Light>();
+
+            Light current = other.gameObject.GetComponentInChildren<Light>();
+            Debug.Log(current.enabled);
                 if (current.enabled)
                 {
                     nav.destination = current.transform.position;
 
                     float dist = Vector3.Distance(transform.position, current.transform.position);
-                    if (dist < 1.5)
+                    if (dist < 2)
                     {
                         current.enabled = false;
                     }
                 }
+                else
+                {
+                    cyclopsAI.state = CyclopsAI.State.PATROLLING;
+                }
 
-            }
+            
         }
     }
     void OnTriggerExit (Collider other)

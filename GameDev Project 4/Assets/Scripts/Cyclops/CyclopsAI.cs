@@ -5,7 +5,7 @@ public class CyclopsAI : MonoBehaviour
 {
     //Editables //some variables will be used later for animation and navigational mesh
     public float patrolSpeed = 4f;
-    public float chaseSpeed = 2.9f;
+    public float chaseSpeed = 2.5f;
     public float chaseWaitTime = 4f;
     public float patrolWaitTime = 1f;
     private float patrolTimer;
@@ -31,7 +31,7 @@ public class CyclopsAI : MonoBehaviour
     public enum State
     {
         CHASING,
-        NEUTRAL,
+        INVESTIGATING,
         PATROLLING,
         EATING,
         ENRAGED
@@ -89,8 +89,8 @@ public class CyclopsAI : MonoBehaviour
                 case State.PATROLLING:
                     Patrolling();
                     break;
-                case State.NEUTRAL:
-                    Neutral();
+                case State.INVESTIGATING:
+                    Investigating();
                     break;
                 case State.CHASING:
                     Chasing();
@@ -106,9 +106,13 @@ public class CyclopsAI : MonoBehaviour
         }
     }
     // Update is called once per frame
-    void Neutral()
+    void Investigating()
     {
-
+        nav.destination = cyclopsSight.previousSighting;
+        if (nav.remainingDistance < nav.stoppingDistance)
+        {
+            state = CyclopsAI.State.PATROLLING;
+        }
     }
 
     void GoToRockPile()
@@ -181,20 +185,22 @@ public class CyclopsAI : MonoBehaviour
                 {
                     wayPointIndex++;
                 }
-            }
-            //basic investigation state. checks the spot of player last seen if its been a while.
-            if (Time.time - playerLastSeen > 10.0f && cyclopsSight.playerInSight == false)
-            {
-                //state = CyclopsAI.State.ENRAGED;
-                nav.destination = cyclopsSight.previousSighting;
-            }
-            else if (Time.time - playerLastSeen > 10.0f && cyclopsSight.playerInSight == false)
-            {
-                if (rockPile.numRatsDigging > 30)
+                //basic investigation state. checks the spot of player last seen if its been a while.
+                if (Time.time - playerLastSeen > 15.0f && cyclopsSight.playerInSight == false)
                 {
-                    state = CyclopsAI.State.ENRAGED;
+                    //state = CyclopsAI.State.ENRAGED;
+                    if (rockPile.numRatsDigging > 10)
+                    {
+                        state = CyclopsAI.State.ENRAGED;
+                    }
+                    else
+                    {
+                        state = CyclopsAI.State.INVESTIGATING;
+                    }
                 }
+
             }
+
         }
     }
 
