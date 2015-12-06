@@ -14,6 +14,7 @@ TagManager:
   - RockPile
   - CyclopsWaypoint
   - MainLights
+  - TrapBubble
   layers:
   - Default
   - TransparentFX

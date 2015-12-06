@@ -18,6 +18,7 @@ public class RatAI : MonoBehaviour {
 	private GameObject Player;
 	private Transform PlayerTransform;
 	private PlayerController PlayerCon;
+	private TrapBubbleScript TrapBubble;
 
 	//WONDER variables
 	public Material MatRatWonder;
@@ -46,6 +47,8 @@ public class RatAI : MonoBehaviour {
 	void Start () {
 		GS = GameObject.FindGameObjectWithTag ("GameState");
 		GSscript = GS.GetComponent<GameState> ();
+
+		TrapBubble = GetComponentInChildren<TrapBubbleScript> ();
 
 		Player = GameObject.FindGameObjectWithTag ("Player");
 		PlayerCon = Player.GetComponent<PlayerController> ();
@@ -117,7 +120,8 @@ public class RatAI : MonoBehaviour {
 
 	void Idle(){
 
-		nav.Move (Vector3.zero);
+		nav.speed = 0;
+		nav.Move (nav.desiredVelocity);
 
 		idleTimer -= Time.deltaTime;
 		if (idleTimer <= 0.0f) {
@@ -127,10 +131,14 @@ public class RatAI : MonoBehaviour {
 
 	void Trapped(){
 
-		nav.Move (Vector3.zero);
+		nav.speed = 0;
+		nav.Move (nav.desiredVelocity);
+
+		TrapBubble.enableTrap ();
 
 		trappedTimer -= Time.deltaTime;
 		if (trappedTimer <= 0.0f) {
+			TrapBubble.disableTrap ();
 			state = RatAI.State.FLEE;
 		}
 	}
