@@ -19,6 +19,7 @@ public class RatAI : MonoBehaviour {
 	private Transform PlayerTransform;
 	private PlayerController PlayerCon;
 	private TrapBubbleScript TrapBubble;
+	private SphereCollider VisionSphere;
 
 	//WONDER variables
 	public Material MatRatWonder;
@@ -49,6 +50,8 @@ public class RatAI : MonoBehaviour {
 		GSscript = GS.GetComponent<GameState> ();
 
 		TrapBubble = GetComponentInChildren<TrapBubbleScript> ();
+
+		VisionSphere = GetComponent<SphereCollider> ();
 
 		Player = GameObject.FindGameObjectWithTag ("Player");
 		PlayerCon = Player.GetComponent<PlayerController> ();
@@ -153,6 +156,16 @@ public class RatAI : MonoBehaviour {
 			GSscript.subRat();
 			this.gameObject.SetActive (false);
 			Destroy (this);
+		}
+	}
+
+	void OnTriggerEnter(Collider Other){
+		if (Other.tag == "Player" && state.ToString () != "TRAPPED") {
+			state = RatAI.State.FLEE;
+		}
+
+		if (Other.tag == "Cyclops" && state.ToString () != "TRAPPED") {
+			state = RatAI.State.FLEE;
 		}
 	}
 	
