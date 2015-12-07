@@ -54,9 +54,11 @@ public class PlayerController : MonoBehaviour {
 		//Movement
 		Vector3 forward = transform.TransformDirection(Vector3.forward);	//Used to set movement relative to current orientation
 		Vector3 right = transform.TransformDirection (Vector3.right);		//Used to set movement relative to current orientation
+        Vector3 up = transform.TransformDirection(Vector3.up);
 		float verticalSpeed = Input.GetAxis ("Vertical") * speed;
 		float horizontalSpeed = Input.GetAxis ("Horizontal") * speed;
 		isSprinting = false;
+        float finalSpeed = speed;
 
 
 		//Crouching
@@ -73,6 +75,7 @@ public class PlayerController : MonoBehaviour {
 		if (isCrouching) {													//If crouching movement is half it's normal speed
 			horizontalSpeed = horizontalSpeed / 2;
 			verticalSpeed = verticalSpeed / 2;
+            finalSpeed = speed / 2;
 		}
 
 
@@ -81,23 +84,24 @@ public class PlayerController : MonoBehaviour {
 			verticalSpeed = verticalSpeed * 2;								            //their normal speed and isSprinting = true
 			horizontalSpeed = horizontalSpeed * 2;							            //otherwise isSprinting = false
 			isSprinting = true;
+            finalSpeed = speed * 2;
 		}
-        /*
+        
         if (controller.isGrounded)
         {
             moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
             moveDirection = transform.TransformDirection(moveDirection);
-            //moveDirection *= speed;
+            moveDirection *= finalSpeed;
             if (Input.GetButton("Jump"))
                 moveDirection.y = jumpSpeed;
 
         }
         moveDirection.y -= gravity * Time.deltaTime;
         controller.Move(moveDirection * Time.deltaTime);
-        */
+       
         //Applying movement to the player controller
-        controller.SimpleMove (forward * verticalSpeed);					//Foward and backward movement
-		controller.SimpleMove (right * horizontalSpeed);					//Side to side movement
+        //controller.SimpleMove (forward * verticalSpeed);					//Foward and backward movement
+		//controller.SimpleMove (right * horizontalSpeed);					//Side to side movement
 
 		//Fire Projectiles
 		if (fireRate > 0.0) {
