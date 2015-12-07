@@ -30,8 +30,12 @@ public class PlayerController : MonoBehaviour {
     private GameObject[] lights;
     public bool refilling = false;
 
-	//Might come back and initialize all variables in Start
-	void Start() {
+    public float jumpSpeed = 8.0F;
+    public float gravity = 20.0F;
+    private Vector3 moveDirection = Vector3.zero;
+
+    //Might come back and initialize all variables in Start
+    void Start() {
         stamina = staminaMax;
         lights = GameObject.FindGameObjectsWithTag("MainLights");
 		fireRateConst = fireRate;
@@ -78,9 +82,21 @@ public class PlayerController : MonoBehaviour {
 			horizontalSpeed = horizontalSpeed * 2;							            //otherwise isSprinting = false
 			isSprinting = true;
 		}
+        /*
+        if (controller.isGrounded)
+        {
+            moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+            moveDirection = transform.TransformDirection(moveDirection);
+            //moveDirection *= speed;
+            if (Input.GetButton("Jump"))
+                moveDirection.y = jumpSpeed;
 
-		//Applying movement to the player controller
-		controller.SimpleMove (forward * verticalSpeed);					//Foward and backward movement
+        }
+        moveDirection.y -= gravity * Time.deltaTime;
+        controller.Move(moveDirection * Time.deltaTime);
+        */
+        //Applying movement to the player controller
+        controller.SimpleMove (forward * verticalSpeed);					//Foward and backward movement
 		controller.SimpleMove (right * horizontalSpeed);					//Side to side movement
 
 		//Fire Projectiles
@@ -109,9 +125,10 @@ public class PlayerController : MonoBehaviour {
         {
             RefillStamina();
         }
-        
-		//Visibility
-        visibilityAmount = 0.0f;
+
+        //Visibility
+        float tempVisAmount = 0.0f;
+        //visibilityAmount = 0.0f;
         foreach (GameObject obj in lights)
         {
             LightToggle light = obj.GetComponent<LightToggle>();
@@ -119,14 +136,16 @@ public class PlayerController : MonoBehaviour {
             {
                 if(isCrouching)
                 {
-                    visibilityAmount += (light.currentLight.intensity * 1 / (light.distance + 0.0000001f)) / 2.0f;
+                    tempVisAmount += (light.currentLight.intensity * 1 / (light.distance + 0.0000001f)) / 2.0f;
                 }
                 else
                 {
-                    visibilityAmount += light.currentLight.intensity * 1 / (light.distance + 0.0000001f);
+                    tempVisAmount += light.currentLight.intensity * 1 / (light.distance + 0.0000001f);
                 }
             }
         }
+
+        visibilityAmount = tempVisAmount / 2.0f;
 
         /*
         if(visibilityAmount >= visibilityThreshold)
