@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour {
     public bool isVisible = false;
     public float visibilityAmount = 0.0f;
     public float visibilityThreshold = 0.3f;
+    public float distVisibility = 0.0f;
 
 	//The game object that the player fires
 	public GameObject projectile;
@@ -27,6 +28,7 @@ public class PlayerController : MonoBehaviour {
 	private float fireRateConst;
 
     private GameObject[] lights;
+    public bool refilling = false;
 
 	//Might come back and initialize all variables in Start
 	void Start() {
@@ -70,10 +72,10 @@ public class PlayerController : MonoBehaviour {
 		}
 
 
-		//Sprinting															//If left shift is held down 
-		if (Input.GetButton ("Sprint") && !isCrouching && stamina > 0) {	//and the player is not crouching, they will move twice
-			verticalSpeed = verticalSpeed * 2;								//their normal speed and isSprinting = true
-			horizontalSpeed = horizontalSpeed * 2;							//otherwise isSprinting = false
+		//Sprinting															            //If left shift is held down 
+		if (Input.GetButton ("Sprint") && !isCrouching && stamina > 0 && !refilling) {	//and the player is not crouching, they will move twice
+			verticalSpeed = verticalSpeed * 2;								            //their normal speed and isSprinting = true
+			horizontalSpeed = horizontalSpeed * 2;							            //otherwise isSprinting = false
 			isSprinting = true;
 		}
 
@@ -93,11 +95,17 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		//Stamina
+        if(stamina <= 0 && !Input.GetButton("Sprint") || refilling)
+        {
+            refilling = true;
+            RefillWait();
+        }
+
         if(isSprinting)
         {
             DepleteStamina();
         }
-        else if(!isSprinting && !Input.GetButton("Sprint"))
+        else if(!isSprinting && !Input.GetButton("Sprint") && !refilling)
         {
             RefillStamina();
         }
@@ -120,6 +128,7 @@ public class PlayerController : MonoBehaviour {
             }
         }
 
+        /*
         if(visibilityAmount >= visibilityThreshold)
         {
             isVisible = true;
@@ -128,18 +137,49 @@ public class PlayerController : MonoBehaviour {
         {
             isVisible = false;
         }
+        */
 
-	}
+        if(distVisibility >= visibilityThreshold)
+        {
+            isVisible = true;
+        }
+        else
+        {
+            isVisible = false;
+        }
+    }
+
+    float calculateVisibility(Vector3 otherPos)
+    {
+        float dist = Vector3.Distance(this.transform.position, otherPos);
+        distVisibility = Mathf.Pow(visibilityAmount, dist);
+        return distVisibility;
+    }
 
     void DepleteStamina()
     {
+        refilling = false;
         stamina -= 10.0f * Time.deltaTime;
     }
     
     void RefillStamina()
     {
         if(stamina < staminaMax)
-        stamina += 10.0f * Time.deltaTime;
+        {
+            stamina += 10.0f * Time.deltaTime;
+        }
+    }
+    
+    void RefillWait()
+    {
+        if(stamina < staminaMax / 2)
+        {
+            stamina += 10.0f * Time.deltaTime;
+        }
+        else
+        {
+            refilling = false;
+        }
     }
 
 	public void IncNumRats(){

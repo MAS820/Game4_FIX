@@ -26,14 +26,16 @@ public class GameState : MonoBehaviour {
 	private float staticRSR;
 
     public RockPile rockPile;
+    private float stamScale = 4.0f;
 
 	// Use this for initialization
 	void Start () {
 		TimeRemaining = 100.0f;
 		countDown.text = TimeRemaining.ToString ();
-        staminaBorder.rectTransform.sizeDelta = new Vector2(playerController.staminaMax + 10, 50);
-        staminaBackground.rectTransform.sizeDelta = new Vector2(playerController.staminaMax, 40);
-        staminaBar.rectTransform.sizeDelta = new Vector2(playerController.stamina, 40);
+        staminaBorder.rectTransform.sizeDelta = new Vector2(playerController.staminaMax + (10 / stamScale), 30);
+        staminaBorder.rectTransform.localScale = staminaBackground.rectTransform.localScale = staminaBar.rectTransform.localScale = new Vector3(stamScale, 1, 1);
+        staminaBackground.rectTransform.sizeDelta = new Vector2(playerController.staminaMax, 20);
+        staminaBar.rectTransform.sizeDelta = new Vector2(playerController.stamina, 20);
 		NumRatsHeld.text = playerController.numRats.ToString ();
         uRRPS.text = "Units of Rock Removed Per Second: " + rockPile.uRRPS.ToString();
         numRatsDigging.text = "Number of Rats Digging: " + rockPile.numRatsDigging.ToString();
@@ -52,12 +54,20 @@ public class GameState : MonoBehaviour {
 
 		TimeRemaining -= Time.deltaTime; 
 		countDown.text = ((int)TimeRemaining).ToString ();
-        staminaBar.rectTransform.sizeDelta = new Vector2(playerController.stamina, 40);
+        staminaBar.rectTransform.sizeDelta = new Vector2(playerController.stamina, 20);
 		NumRatsHeld.text = playerController.numRats.ToString ();
         uRRPS.text = "Units of Rock Removed Per Second: " + rockPile.uRRPS.ToString();
         numRatsDigging.text = "Number of Rats Digging: " + rockPile.numRatsDigging.ToString();
         playerVisible.text = "Player visible: " + playerController.isVisible.ToString();
         visibilityAmount.text = "Visibility Amount: " + playerController.visibilityAmount.ToString();
+        if(playerController.refilling)
+        {
+            staminaBar.color = Color.red;
+        }
+        else
+        {
+            staminaBar.color = Color.blue;
+        }
     }
 
 	void ratSpawn(){
