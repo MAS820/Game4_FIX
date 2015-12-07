@@ -23,6 +23,8 @@ public class PlayerController : MonoBehaviour {
 	private bool isSprinting;
 	private bool isCrouching;
 	public int numRats = 0;
+	public float fireRate = 2.0f;
+	private float fireRateConst;
 
     private GameObject[] lights;
 
@@ -30,6 +32,8 @@ public class PlayerController : MonoBehaviour {
 	void Start() {
         stamina = staminaMax;
         lights = GameObject.FindGameObjectsWithTag("MainLights");
+		fireRateConst = fireRate;
+		fireRate = 0;
 	}
 
 	// Update is called once per frame
@@ -78,11 +82,17 @@ public class PlayerController : MonoBehaviour {
 		controller.SimpleMove (right * horizontalSpeed);					//Side to side movement
 
 		//Fire Projectiles
-		if (Input.GetButtonDown ("Fire1")) {
-			//creates an instance of GameObject projectile based on the location and rotation of GameObject projectileLocation
-			Instantiate(projectile, projectileLocation.transform.position , projectileLocation.transform.rotation);
+		if (fireRate > 0.0) {
+			fireRate -= Time.deltaTime;
 		}
 
+		if (Input.GetButtonDown ("Fire1") && fireRate <= 0.0) {
+			//creates an instance of GameObject projectile based on the location and rotation of GameObject projectileLocation
+			Instantiate(projectile, projectileLocation.transform.position , projectileLocation.transform.rotation);
+			fireRate = fireRateConst;
+		}
+
+		//Stamina
         if(isSprinting)
         {
             DepleteStamina();
@@ -92,6 +102,7 @@ public class PlayerController : MonoBehaviour {
             RefillStamina();
         }
         
+		//Visibility
         visibilityAmount = 0.0f;
         foreach (GameObject obj in lights)
         {
