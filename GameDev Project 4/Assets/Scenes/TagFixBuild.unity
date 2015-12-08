@@ -182,7 +182,7 @@ Prefab:
   m_IsPrefabParent: 0
 --- !u!114 &175601833 stripped
 MonoBehaviour:
-  m_PrefabParentObject: {fileID: 11494810, guid: 226c513dfb3b7ec409427fa868d9c316,
+  m_PrefabParentObject: {fileID: 11489472, guid: 226c513dfb3b7ec409427fa868d9c316,
     type: 2}
   m_PrefabInternal: {fileID: 1461451728}
   m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
@@ -309,6 +309,11 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1846093603}
   m_Script: {fileID: 11500000, guid: 64c2e7e1cfa9e2544993d5ef657e2b9c, type: 3}
+--- !u!20 &354389094 stripped
+Camera:
+  m_PrefabParentObject: {fileID: 2028100, guid: 296bd1f1b5fe71843a21f92767863f28,
+    type: 2}
+  m_PrefabInternal: {fileID: 1846093603}
 --- !u!1001 &464343976
 Prefab:
   m_ObjectHideFlags: 0
@@ -452,6 +457,10 @@ Prefab:
       propertyPath: indicator
       value: 
       objectReference: {fileID: 1118708995}
+    - target: {fileID: 11482418, guid: db10f57845783b846a0b44ba5daa51a4, type: 2}
+      propertyPath: reloadBar
+      value: 
+      objectReference: {fileID: 1595068757}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: db10f57845783b846a0b44ba5daa51a4, type: 2}
   m_IsPrefabParent: 0
@@ -581,7 +590,7 @@ MonoBehaviour:
   m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!114 &1189123581 stripped
 MonoBehaviour:
-  m_PrefabParentObject: {fileID: 11404096, guid: 226c513dfb3b7ec409427fa868d9c316,
+  m_PrefabParentObject: {fileID: 11452530, guid: 226c513dfb3b7ec409427fa868d9c316,
     type: 2}
   m_PrefabInternal: {fileID: 1461451728}
   m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
@@ -617,7 +626,7 @@ Transform:
   m_RootOrder: 8
 --- !u!114 &1311693192 stripped
 MonoBehaviour:
-  m_PrefabParentObject: {fileID: 11486268, guid: 226c513dfb3b7ec409427fa868d9c316,
+  m_PrefabParentObject: {fileID: 11410748, guid: 226c513dfb3b7ec409427fa868d9c316,
     type: 2}
   m_PrefabInternal: {fileID: 1461451728}
   m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
@@ -704,6 +713,22 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 22366668, guid: 226c513dfb3b7ec409427fa868d9c316, type: 2}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 354389094}
+    - target: {fileID: 11404096, guid: 226c513dfb3b7ec409427fa868d9c316, type: 2}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11404096, guid: 226c513dfb3b7ec409427fa868d9c316, type: 2}
+      propertyPath: m_Color.g
+      value: .765517235
+      objectReference: {fileID: 0}
+    - target: {fileID: 11404096, guid: 226c513dfb3b7ec409427fa868d9c316, type: 2}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 226c513dfb3b7ec409427fa868d9c316, type: 2}
   m_IsPrefabParent: 0
@@ -762,6 +787,12 @@ MonoBehaviour:
 --- !u!114 &1560107981 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 11492048, guid: 226c513dfb3b7ec409427fa868d9c316,
+    type: 2}
+  m_PrefabInternal: {fileID: 1461451728}
+  m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+--- !u!114 &1595068757 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11404096, guid: 226c513dfb3b7ec409427fa868d9c316,
     type: 2}
   m_PrefabInternal: {fileID: 1461451728}
   m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}

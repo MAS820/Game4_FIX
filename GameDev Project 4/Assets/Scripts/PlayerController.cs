@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour {
 	private bool isCrouching;
 	public int numRats = 0;
 	public float fireRate = 2.0f;
-	private float fireRateConst;
+	public float fireRateConst;
 
     private GameObject[] lights;
     public bool refilling = false;
@@ -40,6 +40,8 @@ public class PlayerController : MonoBehaviour {
         lights = GameObject.FindGameObjectsWithTag("MainLights");
 		fireRateConst = fireRate;
 		fireRate = 0;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
 	}
 
 	// Update is called once per frame

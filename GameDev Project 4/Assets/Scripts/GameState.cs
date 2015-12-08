@@ -16,6 +16,7 @@ public class GameState : MonoBehaviour {
     public Text visibilityAmount;
     public Image visibilityBar;
     public Image indicator;
+    public Image reloadBar;
     public PlayerController playerController;
 
 	//Spawning rats variables
@@ -64,6 +65,7 @@ public class GameState : MonoBehaviour {
         numRatsDigging.text = "Number of Rats Digging: " + rockPile.numRatsDigging.ToString();
         playerVisible.text = "Player visible: " + playerController.isVisible.ToString();
         visibilityAmount.text = "Visibility Amount: " + playerController.visibilityAmount.ToString();
+        reloadBar.rectTransform.sizeDelta = new Vector2(((playerController.fireRateConst - playerController.fireRate) / playerController.fireRateConst) * 200, 20);
         if(playerController.refilling)
         {
             staminaBar.color = Color.red;
@@ -75,6 +77,14 @@ public class GameState : MonoBehaviour {
         float xPos = playerController.visibilityAmount * 300;
         xPos = Mathf.Clamp(xPos, 0, 300);
         indicator.transform.position = origin + new Vector3(xPos, 0, 0);
+        if(playerController.fireRate > 0.0)
+        {
+            reloadBar.color = Color.red;
+        }
+        else
+        {
+            reloadBar.color = Color.green;
+        }
     }
 
 	void ratSpawn(){
