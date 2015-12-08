@@ -24,7 +24,8 @@ public class ProjectilePhysics : MonoBehaviour {
 
 			RatAI ratai;
 			ratai = other.GetComponent<RatAI> ();
-			ratai.state = RatAI.State.TRAPPED;
+			//ratai.state = RatAI.State.TRAPPED;
+			ratai.setToTRAPPED ();
 			this.gameObject.SetActive (false);
 			Destroy (this.gameObject);
 		} else if (other.tag != "Rat" && other.isTrigger == false) {

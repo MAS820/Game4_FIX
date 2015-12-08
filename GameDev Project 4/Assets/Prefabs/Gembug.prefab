@@ -1607,9 +1607,9 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: cb2fbb1d834d78e4195f589975dcc087, type: 3}
   m_Controller: {fileID: 9100000, guid: b1ca641551bc67f498e3526eb626eef8, type: 2}
-  m_CullingMode: 1
+  m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -2320,11 +2320,15 @@ Prefab:
       objectReference: {fileID: 153558, guid: f7a1dca80d17e46408714460232656dd, type: 2}
     - target: {fileID: 0}
       propertyPath: m_ApplyRootMotion
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_IsTrigger
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_CullingMode
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
