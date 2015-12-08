@@ -82,7 +82,7 @@ public class LightToggle : MonoBehaviour {
     //Check player position if in range of lamp to toggle.
     void toggleLamp(float dist)
         {
-            if (distance <= 3.0)
+            if (distance <= 10.0)
             {
                 // If player presses "E", enable light;
                 //Possible implementation: Light turns decreases in intensity over time and eventually turns off if untouched.
@@ -100,7 +100,7 @@ public class LightToggle : MonoBehaviour {
         //it will allow us to flag the player to be hidden/non-hidden;
 
         //check the distance and light range.
-        if (dist <= currentLight.range && currentLight.enabled == true)
+        if (currentLight.enabled == true)
         {
             //flag player visible
             //playerController.isVisible = true;

@@ -42,11 +42,12 @@ public class CyclopsSight : MonoBehaviour {
 
     void OnTriggerStay (Collider other)
     {
+
         if (other.gameObject == player)
         {
 
             playerInSight = false;
-            Debug.Log(playerInSight);
+            //Debug.Log(playerInSight);
             Vector3 direction = other.transform.position - transform.position;
             float angle = Vector3.Angle(direction, transform.forward);
             // Debug.Log(angle);
@@ -60,7 +61,6 @@ public class CyclopsSight : MonoBehaviour {
                     {
                         //player is seen
                         playerInSight = true;
-
                         previousSighting = player.transform.position;
 
                     }
@@ -68,7 +68,7 @@ public class CyclopsSight : MonoBehaviour {
             }
             else
             {
-                if (Vector3.Distance(transform.position, player.transform.position) < 5)
+                if (Vector3.Distance(transform.position, player.transform.position) < 30)
                 {
                     playerInSight = true;
                     previousSighting = player.transform.position;
@@ -80,7 +80,7 @@ public class CyclopsSight : MonoBehaviour {
 
         }
 
-        else if (other.gameObject.tag == "Lamps")
+        if (other.gameObject.tag == "Lamps")
         {
 
             Light current = other.gameObject.GetComponentInChildren<Light>();
@@ -90,15 +90,14 @@ public class CyclopsSight : MonoBehaviour {
                     nav.destination = current.transform.position;
 
                     float dist = Vector3.Distance(transform.position, current.transform.position);
-                    if (dist < 2)
+                Debug.Log("the distance is " + dist);
+                    if (dist < 50)
                     {
                         current.enabled = false;
-                    }
+                         //cyclopsAI.state = CyclopsAI.State.PATROLLING;
+
                 }
-                else
-                {
-                    cyclopsAI.state = CyclopsAI.State.PATROLLING;
-                }
+            }
 
             
         }

@@ -4,12 +4,11 @@ using System.Collections;
 public class CyclopsAI : MonoBehaviour
 {
     //Editables //some variables will be used later for animation and navigational mesh
-    public float patrolSpeed = 4f;
-    public float chaseSpeed = 2.5f;
-    public float chaseWaitTime = 4f;
+    public float patrolSpeed = 10f;
+    public float chaseSpeed = 30f;
     public float patrolWaitTime = 1f;
+    public float acceleration = 0.01f;
     private float patrolTimer;
-    private float chaseTimer;
 
     private NavMeshAgent nav;
     public Vector3[] patrolWayPoints;
@@ -120,6 +119,7 @@ public class CyclopsAI : MonoBehaviour
         nav.speed = chaseSpeed;
         nav.destination = rockPile.transform.position; 
     }
+
     void Chasing()
     {
         //set speed;
@@ -131,13 +131,14 @@ public class CyclopsAI : MonoBehaviour
         Vector3 sightingDeltaPos = cyclopsSight.previousSighting - transform.position;
         float dist = Vector3.Distance(cyclopsSight.previousSighting, transform.position);
         //Get the magnitude of the vector (distance)
-        if (dist <= 6 && cyclopsSight.playerInSight == true)
+        if (dist <= 50 && cyclopsSight.playerInSight == true)
         {
             //Tell enemy to walk to player location
             nav.destination = player.transform.position;
         }
         else 
         {
+            nav.destination = cyclopsSight.previousSighting;
             cyclopsSight.playerInSight = false;
         }
         //If we're nearing the destination, add to chase timer.
@@ -169,11 +170,23 @@ public class CyclopsAI : MonoBehaviour
 
             //Get the position of the first waypoint
             waypoint = wayPoints[wayPointIndex].transform.position;
-            nav.speed = patrolSpeed;
+            if (nav.speed != patrolSpeed && playerLastSeen < 0)
+            {
+                Debug.Log("hello");
+                nav.speed = patrolSpeed;
+
+            }
+            else
+            {
+                nav.speed += acceleration;
+
+            }
+            // Debug.Log(waypoint);
             //float dist = Vector3.Distance(waypoint, transform.position);
             if (nav.remainingDistance < nav.stoppingDistance)
             {
                 nav.destination = waypoint;
+                Debug.Log(Time.time);
 
                 //If we reach the end of the list, start over
                 if (wayPointIndex == wayPoints.Length - 1)
@@ -189,15 +202,19 @@ public class CyclopsAI : MonoBehaviour
                 if (Time.time - playerLastSeen > 15.0f && cyclopsSight.playerInSight == false)
                 {
                     //state = CyclopsAI.State.ENRAGED;
-                    if (rockPile.numRatsDigging > 10)
+                    if (rockPile != null)
                     {
-                        state = CyclopsAI.State.ENRAGED;
-                    }
-                    else
-                    {
-                        state = CyclopsAI.State.INVESTIGATING;
+                        if (rockPile.numRatsDigging > 10)
+                        {
+                            state = CyclopsAI.State.ENRAGED;
+                        }
+                        else
+                        {
+                            state = CyclopsAI.State.INVESTIGATING;
+                        }
                     }
                 }
+
 
             }
 
