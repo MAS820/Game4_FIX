@@ -62,6 +62,12 @@ public class PlayerController : MonoBehaviour {
 		isSprinting = false;
         float finalSpeed = speed;
 
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+
 
 		//Crouching
 		if (Input.GetButtonUp ("Crouch")) {									//If Q is pressed the player will crouch
