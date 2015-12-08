@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: a7ae3ed889bdc494cb4517fc848bc17a
-timeCreated: 1449465570
+timeCreated: 1449539658
 licenseType: Free
 SubstanceImporter:
   serializedVersion: 5
@@ -15,7 +15,7 @@ SubstanceImporter:
     inputs:
     - name: $randomseed
       value:
-        scalar[0]: 0
+        scalar[0]: 1992
         scalar[1]: 0
         scalar[2]: 0
         scalar[3]: 0

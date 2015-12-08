@@ -30,8 +30,12 @@ public class PlayerController : MonoBehaviour {
     private GameObject[] lights;
     public bool refilling = false;
 
-	//Might come back and initialize all variables in Start
-	void Start() {
+    public float jumpSpeed = 8.0F;
+    public float gravity = 20.0F;
+    private Vector3 moveDirection = Vector3.zero;
+
+    //Might come back and initialize all variables in Start
+    void Start() {
         stamina = staminaMax;
         lights = GameObject.FindGameObjectsWithTag("MainLights");
 		fireRateConst = fireRate;
@@ -50,9 +54,11 @@ public class PlayerController : MonoBehaviour {
 		//Movement
 		Vector3 forward = transform.TransformDirection(Vector3.forward);	//Used to set movement relative to current orientation
 		Vector3 right = transform.TransformDirection (Vector3.right);		//Used to set movement relative to current orientation
+        Vector3 up = transform.TransformDirection(Vector3.up);
 		float verticalSpeed = Input.GetAxis ("Vertical") * speed;
 		float horizontalSpeed = Input.GetAxis ("Horizontal") * speed;
 		isSprinting = false;
+        float finalSpeed = speed;
 
 
 		//Crouching
@@ -69,6 +75,7 @@ public class PlayerController : MonoBehaviour {
 		if (isCrouching) {													//If crouching movement is half it's normal speed
 			horizontalSpeed = horizontalSpeed / 2;
 			verticalSpeed = verticalSpeed / 2;
+            finalSpeed = speed / 2;
 		}
 
 
@@ -77,11 +84,24 @@ public class PlayerController : MonoBehaviour {
 			verticalSpeed = verticalSpeed * 2;								            //their normal speed and isSprinting = true
 			horizontalSpeed = horizontalSpeed * 2;							            //otherwise isSprinting = false
 			isSprinting = true;
+            finalSpeed = speed * 2;
 		}
+        
+        if (controller.isGrounded)
+        {
+            moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+            moveDirection = transform.TransformDirection(moveDirection);
+            moveDirection *= finalSpeed;
+            if (Input.GetButton("Jump"))
+                moveDirection.y = jumpSpeed;
 
-		//Applying movement to the player controller
-		controller.SimpleMove (forward * verticalSpeed);					//Foward and backward movement
-		controller.SimpleMove (right * horizontalSpeed);					//Side to side movement
+        }
+        moveDirection.y -= gravity * Time.deltaTime;
+        controller.Move(moveDirection * Time.deltaTime);
+       
+        //Applying movement to the player controller
+        //controller.SimpleMove (forward * verticalSpeed);					//Foward and backward movement
+		//controller.SimpleMove (right * horizontalSpeed);					//Side to side movement
 
 		//Fire Projectiles
 		if (fireRate > 0.0) {
@@ -109,9 +129,10 @@ public class PlayerController : MonoBehaviour {
         {
             RefillStamina();
         }
-        
-		//Visibility
-        visibilityAmount = 0.0f;
+
+        //Visibility
+        float tempVisAmount = 0.0f;
+        //visibilityAmount = 0.0f;
         foreach (GameObject obj in lights)
         {
             LightToggle light = obj.GetComponent<LightToggle>();
@@ -119,14 +140,16 @@ public class PlayerController : MonoBehaviour {
             {
                 if(isCrouching)
                 {
-                    visibilityAmount += (light.currentLight.intensity * 1 / (light.distance + 0.0000001f)) / 2.0f;
+                    tempVisAmount += (light.currentLight.intensity * 1 / (light.distance + 0.0000001f)) / 2.0f;
                 }
                 else
                 {
-                    visibilityAmount += light.currentLight.intensity * 1 / (light.distance + 0.0000001f);
+                    tempVisAmount += light.currentLight.intensity * 1 / (light.distance + 0.0000001f);
                 }
             }
         }
+
+        visibilityAmount = tempVisAmount / 2.0f;
 
         /*
         if(visibilityAmount >= visibilityThreshold)
