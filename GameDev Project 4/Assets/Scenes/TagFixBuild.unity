@@ -671,7 +671,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22436952, guid: 226c513dfb3b7ec409427fa868d9c316, type: 2}
       propertyPath: m_RootOrder
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 22436952, guid: 226c513dfb3b7ec409427fa868d9c316, type: 2}
       propertyPath: m_AnchoredPosition.x
@@ -717,16 +717,8 @@ Prefab:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 354389094}
-    - target: {fileID: 11404096, guid: 226c513dfb3b7ec409427fa868d9c316, type: 2}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11404096, guid: 226c513dfb3b7ec409427fa868d9c316, type: 2}
-      propertyPath: m_Color.g
-      value: .765517235
-      objectReference: {fileID: 0}
-    - target: {fileID: 11404096, guid: 226c513dfb3b7ec409427fa868d9c316, type: 2}
-      propertyPath: m_Color.b
+    - target: {fileID: 8284326, guid: 226c513dfb3b7ec409427fa868d9c316, type: 2}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
