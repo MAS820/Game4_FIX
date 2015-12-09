@@ -71,7 +71,7 @@ public class GameState : MonoBehaviour {
 
         checkIfCaught();
 
-        if(TimeRemaining == 0.0 || caught)
+        if(TimeRemaining <= 0.0 || caught)
         {
             Application.LoadLevel("Lose");
         }
@@ -83,10 +83,10 @@ public class GameState : MonoBehaviour {
 		TimeRemaining -= Time.deltaTime; 
 		countDown.text = ((int)TimeRemaining).ToString ();
         staminaBar.rectTransform.sizeDelta = new Vector2(playerController.stamina, 20);
-		NumRatsHeld.text = "Number of Rats Held: " + playerController.numRats.ToString();
+		NumRatsHeld.text = "Number of Gem Bugs Held: " + playerController.numRats.ToString();
         uRRPS.text = "Amount Left to Dig: " + amountToDig.ToString("F2");
         //uRRPS.text = "Units of Rock Removed Per Second: " + rockPile.uRRPS.ToString();
-        numRatsDigging.text = "Number of Rats Digging: " + rockPile.numRatsDigging.ToString();
+        numRatsDigging.text = "Number of Gem Bugs Digging: " + rockPile.numRatsDigging.ToString();
         //playerVisible.text = "Player visible: " + playerController.isVisible.ToString();
         visibilityAmount.text = "Visibility Amount: " + playerController.visibilityAmount.ToString();
         reloadBar.rectTransform.sizeDelta = new Vector2(((playerController.fireRateConst - playerController.fireRate) / playerController.fireRateConst) * 200, 20);
