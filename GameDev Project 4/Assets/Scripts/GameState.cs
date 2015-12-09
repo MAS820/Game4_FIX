@@ -45,7 +45,8 @@ public class GameState : MonoBehaviour {
         numRatsDigging.text = "Number of Rats Digging: " + rockPile.numRatsDigging.ToString();
         playerVisible.text = "Player visible: " + playerController.isVisible.ToString();
         visibilityAmount.text = "Visibility Amount: " + playerController.visibilityAmount.ToString();
-        origin = indicator.transform.position;
+        origin = indicator.rectTransform.position;
+        print(origin.ToString());
         //Spawning rats initialization
         ratSpawnLocations = GameObject.FindGameObjectsWithTag ("RatSpawn");
 		ratSpawnInd = Random.Range(0, ratSpawnLocations.Length);
@@ -76,7 +77,8 @@ public class GameState : MonoBehaviour {
         }
         float xPos = playerController.visibilityAmount * 300;
         xPos = Mathf.Clamp(xPos, 0, 300);
-        indicator.transform.position = origin + new Vector3(xPos, 0, 0);
+        indicator.transform.position = origin;
+        //indicator.transform.position = origin + new Vector3(xPos, 0, 0);
         if(playerController.fireRate > 0.0)
         {
             reloadBar.color = Color.red;
