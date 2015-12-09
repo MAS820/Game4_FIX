@@ -5,10 +5,10 @@ public class LightToggle : MonoBehaviour {
 
     //variables needed for light intensity interpolation
     public float fadeSpeed = 2f;
-    public float highIntensity = 2.5f;
+    public float highIntensity = 2f;
     public float lowIntensity = 1f;
     public float changeMargin = 0.2f;
-    public float range = 20f;
+    public float range = 30f;
     public Light currentLight;
     public bool playerInLight = false;
 

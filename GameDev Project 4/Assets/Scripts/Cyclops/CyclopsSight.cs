@@ -5,6 +5,7 @@ using System.Collections;
 public class CyclopsSight : MonoBehaviour {
     public float fieldOfViewAngle = 190f;
     public bool playerInSight;
+
     public bool gameOver;
     Light currentLight;
     private NavMeshAgent nav;
@@ -13,6 +14,7 @@ public class CyclopsSight : MonoBehaviour {
     private GameObject player;
     private GameObject cyclops;
     private Animator playerAnim;
+    private Vector3 playerPos;
     public Vector3 previousSighting;
     public CyclopsAI cyclopsAI;
     private CharacterController cyclopsController;
@@ -27,7 +29,7 @@ public class CyclopsSight : MonoBehaviour {
         anim = GetComponent<Animator>();
         player = GameObject.Find("Player");
         cyclops = GameObject.Find("Cyclops");
-
+        
         nav.updateRotation = true;
         nav.updatePosition = true;
     }
@@ -36,6 +38,7 @@ public class CyclopsSight : MonoBehaviour {
 	void Update () {
         if (!gameOver)
         {
+            playerPos = player.transform.position;
         }
         	
 	}
@@ -46,7 +49,7 @@ public class CyclopsSight : MonoBehaviour {
         if (other.gameObject == player)
         {
 
-            playerInSight = false;
+            //playerInSight = false;
             //Debug.Log(playerInSight);
             Vector3 direction = other.transform.position - transform.position;
             float angle = Vector3.Angle(direction, transform.forward);
@@ -59,28 +62,31 @@ public class CyclopsSight : MonoBehaviour {
                 {
                     if (hit.collider.gameObject == player)
                     {
-                        //player is seen
                         playerInSight = true;
-                        previousSighting = player.transform.position;
+                        previousSighting = playerPos;
 
                     }
                 }
             }
             else
             {
-                if (Vector3.Distance(transform.position, player.transform.position) < 30)
+                // small radius check around the cyclops so to agro player.
+
+                if (Vector3.Distance(transform.position, playerPos) < 45)
                 {
                     playerInSight = true;
-                    previousSighting = player.transform.position;
-
+                    previousSighting = playerPos;
+                }
+                else
+                {
+                    playerInSight = false;
                 }
 
             }
-            //Add another small radius check around the cyclops so to agro player.
 
         }
 
-        if (other.gameObject.tag == "Lamps")
+        else if (other.gameObject.tag == "Lamps")
         {
 
             Light current = other.gameObject.GetComponentInChildren<Light>();
@@ -90,8 +96,7 @@ public class CyclopsSight : MonoBehaviour {
                     nav.destination = current.transform.position;
 
                     float dist = Vector3.Distance(transform.position, current.transform.position);
-                //Debug.Log("the distance is " + dist);
-                    if (dist < 50)
+                    if (dist < 20)
                     {
                         current.enabled = false;
                          //cyclopsAI.state = CyclopsAI.State.PATROLLING;
@@ -99,16 +104,18 @@ public class CyclopsSight : MonoBehaviour {
                 }
             }
         }
-        if (other.gameObject.tag == "Projectile")
+        else if (other.gameObject.tag == "Projectile")
         {
-            nav.destination = player.transform.position;
+            //cyclopsAI.state = CyclopsAI.State.CHASING;
+            playerInSight = true;
+            nav.destination = playerPos;
         }
     }
     void OnTriggerExit (Collider other)
     {
         if (other.gameObject == player)
         {
-            playerInSight = true;
+            playerInSight = false;
             
         }
     }
