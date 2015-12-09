@@ -12,8 +12,8 @@ public class GameState : MonoBehaviour {
 	public Text NumRatsHeld;
     public Text uRRPS;
     public Text numRatsDigging;
-    public Text playerVisible;
-    public Text visibilityAmount;
+    //public Text playerVisible;
+    //public Text visibilityAmount;
     public Image visibilityBar;
     public Image indicator;
     public Image reloadBar;
@@ -43,8 +43,8 @@ public class GameState : MonoBehaviour {
 		NumRatsHeld.text = playerController.numRats.ToString ();
         uRRPS.text = "Units of Rock Removed Per Second: " + rockPile.uRRPS.ToString();
         numRatsDigging.text = "Number of Rats Digging: " + rockPile.numRatsDigging.ToString();
-        playerVisible.text = "Player visible: " + playerController.isVisible.ToString();
-        visibilityAmount.text = "Visibility Amount: " + playerController.visibilityAmount.ToString();
+        //playerVisible.text = "Player visible: " + playerController.isVisible.ToString();
+        //visibilityAmount.text = "Visibility Amount: " + playerController.visibilityAmount.ToString();
         origin = indicator.transform.position;
         //Spawning rats initialization
         ratSpawnLocations = GameObject.FindGameObjectsWithTag ("RatSpawn");
@@ -63,8 +63,8 @@ public class GameState : MonoBehaviour {
 		NumRatsHeld.text = playerController.numRats.ToString ();
         uRRPS.text = "Units of Rock Removed Per Second: " + rockPile.uRRPS.ToString();
         numRatsDigging.text = "Number of Rats Digging: " + rockPile.numRatsDigging.ToString();
-        playerVisible.text = "Player visible: " + playerController.isVisible.ToString();
-        visibilityAmount.text = "Visibility Amount: " + playerController.visibilityAmount.ToString();
+        //playerVisible.text = "Player visible: " + playerController.isVisible.ToString();
+        //visibilityAmount.text = "Visibility Amount: " + playerController.visibilityAmount.ToString();
         reloadBar.rectTransform.sizeDelta = new Vector2(((playerController.fireRateConst - playerController.fireRate) / playerController.fireRateConst) * 200, 20);
         if(playerController.refilling)
         {
