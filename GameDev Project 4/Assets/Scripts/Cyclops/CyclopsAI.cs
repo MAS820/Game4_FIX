@@ -4,8 +4,8 @@ using System.Collections;
 public class CyclopsAI : MonoBehaviour
 {
     //Editables //some variables will be used later for animation and navigational mesh
-    public float patrolSpeed = 100f;
-    public float chaseSpeed = 60f;
+    public float patrolSpeed = 40f;
+    public float chaseSpeed = 30f;
     public float patrolWaitTime = 1f;
     public float acceleration = 0.01f;
     private float patrolTimer;
@@ -171,7 +171,7 @@ public class CyclopsAI : MonoBehaviour
 
         //Get the position of the player. Get the delta vector between player / enemy
         Vector3 sightingDeltaPos = cyclopsSight.previousSighting - transform.position;
-        float dist = Vector3.Distance(cyclopsSight.previousSighting, transform.position);
+        float dist = Vector3.Distance(playerTransform.position, transform.position);
 
         //Get the magnitude of the vector (distance)
         if (dist <= 50 && cyclopsSight.playerInSight == true)
