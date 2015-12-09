@@ -18,6 +18,7 @@ public class GameState : MonoBehaviour {
     public Image indicator;
     public Image reloadBar;
     public PlayerController playerController;
+    public CyclopsAI cyclops;
 
 	//Spawning rats variables
 	public GameObject[] ratSpawnLocations;
@@ -33,6 +34,7 @@ public class GameState : MonoBehaviour {
     private Vector3 origin;
 
     public float amountToDig = 50.0f;
+    private bool caught = false;
 
 	// Use this for initialization
 	void Start () {
@@ -65,6 +67,17 @@ public class GameState : MonoBehaviour {
         else
         {
             amountToDig = 0.0f;
+        }
+
+        checkIfCaught();
+
+        if(TimeRemaining == 0.0 || caught)
+        {
+            Application.LoadLevel("Lose");
+        }
+        if(amountToDig == 0.0f)
+        {
+            Application.LoadLevel("Win");
         }
 
 		TimeRemaining -= Time.deltaTime; 
@@ -111,4 +124,14 @@ public class GameState : MonoBehaviour {
 	public void subRat(){
 		numActiveRats -= 1;
 	}
+
+    void checkIfCaught()
+    {
+        float dist = Vector3.Distance(playerController.transform.position, cyclops.transform.position);
+        if(dist <= 15)
+        {
+            caught = true;
+            print(caught);
+        }
+    }
 }

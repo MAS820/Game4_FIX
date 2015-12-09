@@ -5374,6 +5374,10 @@ Prefab:
       propertyPath: ratSpawnRate
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 11482418, guid: db10f57845783b846a0b44ba5daa51a4, type: 2}
+      propertyPath: cyclops
+      value: 
+      objectReference: {fileID: 1461118757}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: db10f57845783b846a0b44ba5daa51a4, type: 2}
   m_IsPrefabParent: 0
@@ -26161,6 +26165,10 @@ Prefab:
       propertyPath: rockPile
       value: 
       objectReference: {fileID: 1445800706}
+    - target: {fileID: 13686302, guid: 85472b58705ad6f4eb92f146c7485dcc, type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 85472b58705ad6f4eb92f146c7485dcc, type: 2}
   m_IsPrefabParent: 0
