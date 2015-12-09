@@ -40,9 +40,9 @@ public class LightToggle : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        
+        Camera fpcam = obj.GetComponent<Camera>();
         //get the positions of the player object and light object.
-        pos_player = playerObject.transform.position;
+        pos_player = fpcam.transform.position;
         pos_light = currentLight.transform.position;
 
         //calculate the distance from player to light
@@ -54,7 +54,6 @@ public class LightToggle : MonoBehaviour {
         toggleLamp(distance);
         
         RaycastHit hit;
-        Camera fpcam = obj.GetComponent<Camera>();
         //Vector3 rayDirection2 = (playerController.transform.position) - this.transform.position;
         Vector3 rayDirection = fpcam.transform.position - this.transform.position;
         if(currentLight.enabled)

@@ -13,7 +13,7 @@ public class GameState : MonoBehaviour {
     public Text uRRPS;
     public Text numRatsDigging;
     //public Text playerVisible;
-    //public Text visibilityAmount;
+    public Text visibilityAmount;
     public Image visibilityBar;
     public Image indicator;
     public Image reloadBar;
@@ -64,7 +64,7 @@ public class GameState : MonoBehaviour {
         uRRPS.text = "Units of Rock Removed Per Second: " + rockPile.uRRPS.ToString();
         numRatsDigging.text = "Number of Rats Digging: " + rockPile.numRatsDigging.ToString();
         //playerVisible.text = "Player visible: " + playerController.isVisible.ToString();
-        //visibilityAmount.text = "Visibility Amount: " + playerController.visibilityAmount.ToString();
+        visibilityAmount.text = "Visibility Amount: " + playerController.visibilityAmount.ToString();
         reloadBar.rectTransform.sizeDelta = new Vector2(((playerController.fireRateConst - playerController.fireRate) / playerController.fireRateConst) * 200, 20);
         if(playerController.refilling)
         {
@@ -74,7 +74,7 @@ public class GameState : MonoBehaviour {
         {
             staminaBar.color = Color.blue;
         }
-        float xPos = playerController.visibilityAmount * 300;
+        float xPos = (playerController.visibilityAmount / 2.5f) * 300;
         xPos = Mathf.Clamp(xPos, 0, 300);
         indicator.transform.position = origin + new Vector3(xPos, 0, 0);
         if(playerController.fireRate > 0.0)
