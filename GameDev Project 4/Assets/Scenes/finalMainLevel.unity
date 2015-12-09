@@ -5856,6 +5856,14 @@ Prefab:
       propertyPath: m_Radius
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 11453766, guid: bdb5ff0ec3b3bac43b6f4d97c179fd08, type: 2}
+      propertyPath: playerController
+      value: 
+      objectReference: {fileID: 1144043493}
+    - target: {fileID: 11453766, guid: bdb5ff0ec3b3bac43b6f4d97c179fd08, type: 2}
+      propertyPath: cyclops
+      value: 
+      objectReference: {fileID: 1461118757}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bdb5ff0ec3b3bac43b6f4d97c179fd08, type: 2}
   m_IsPrefabParent: 0
@@ -14098,7 +14106,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1055488036
 Transform:
@@ -14724,7 +14732,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1065863013
 Transform:
@@ -17682,7 +17690,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!23 &1268693303
 MeshRenderer:
@@ -19855,6 +19863,12 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 482977823}
   m_Script: {fileID: 11500000, guid: c917272fbd8d14b4a9df2b51e5547268, type: 3}
+--- !u!114 &1461118757 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11455530, guid: 85472b58705ad6f4eb92f146c7485dcc,
+    type: 2}
+  m_PrefabInternal: {fileID: 2045231009}
+  m_Script: {fileID: 11500000, guid: 176136dcd9f7a80498e1860af92d8535, type: 3}
 --- !u!1001 &1465696281
 Prefab:
   m_ObjectHideFlags: 0
