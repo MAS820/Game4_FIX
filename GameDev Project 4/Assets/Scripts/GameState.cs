@@ -60,7 +60,7 @@ public class GameState : MonoBehaviour {
 		TimeRemaining -= Time.deltaTime; 
 		countDown.text = ((int)TimeRemaining).ToString ();
         staminaBar.rectTransform.sizeDelta = new Vector2(playerController.stamina, 20);
-		NumRatsHeld.text = playerController.numRats.ToString ();
+		NumRatsHeld.text = "Number of Rats Held: " + playerController.numRats.ToString();
         uRRPS.text = "Units of Rock Removed Per Second: " + rockPile.uRRPS.ToString();
         numRatsDigging.text = "Number of Rats Digging: " + rockPile.numRatsDigging.ToString();
         //playerVisible.text = "Player visible: " + playerController.isVisible.ToString();
@@ -74,7 +74,7 @@ public class GameState : MonoBehaviour {
         {
             staminaBar.color = Color.blue;
         }
-        float xPos = (playerController.visibilityAmount / 2.5f) * 300;
+        float xPos = (playerController.visibilityAmount / 0.17f) * 300;
         xPos = Mathf.Clamp(xPos, 0, 300);
         indicator.transform.position = origin + new Vector3(xPos, 0, 0);
         if(playerController.fireRate > 0.0)
