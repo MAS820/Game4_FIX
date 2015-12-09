@@ -166,7 +166,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22436952, guid: 226c513dfb3b7ec409427fa868d9c316, type: 2}
       propertyPath: m_RootOrder
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22436952, guid: 226c513dfb3b7ec409427fa868d9c316, type: 2}
       propertyPath: m_AnchoredPosition.x
@@ -208,10 +208,6 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 22366668, guid: 226c513dfb3b7ec409427fa868d9c316, type: 2}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 1586224474}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 226c513dfb3b7ec409427fa868d9c316, type: 2}
   m_IsPrefabParent: 0
@@ -5363,7 +5359,7 @@ Prefab:
     - target: {fileID: 11482418, guid: db10f57845783b846a0b44ba5daa51a4, type: 2}
       propertyPath: reloadBar
       value: 
-      objectReference: {fileID: 1127234178}
+      objectReference: {fileID: 1325894746}
     - target: {fileID: 11482418, guid: db10f57845783b846a0b44ba5daa51a4, type: 2}
       propertyPath: playerController
       value: 
@@ -5860,14 +5856,6 @@ Prefab:
       propertyPath: m_Radius
       value: 20
       objectReference: {fileID: 0}
-    - target: {fileID: 11453766, guid: bdb5ff0ec3b3bac43b6f4d97c179fd08, type: 2}
-      propertyPath: cyclops
-      value: 
-      objectReference: {fileID: 1013253237}
-    - target: {fileID: 11453766, guid: bdb5ff0ec3b3bac43b6f4d97c179fd08, type: 2}
-      propertyPath: playerController
-      value: 
-      objectReference: {fileID: 1144043493}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bdb5ff0ec3b3bac43b6f4d97c179fd08, type: 2}
   m_IsPrefabParent: 0
@@ -13774,12 +13762,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 1
---- !u!114 &1013253237 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 11455530, guid: 85472b58705ad6f4eb92f146c7485dcc,
-    type: 2}
-  m_PrefabInternal: {fileID: 2045231009}
-  m_Script: {fileID: 11500000, guid: 176136dcd9f7a80498e1860af92d8535, type: 3}
 --- !u!1 &1013804312
 GameObject:
   m_ObjectHideFlags: 0
@@ -15363,12 +15345,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 1
---- !u!114 &1127234178 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 11404096, guid: 226c513dfb3b7ec409427fa868d9c316,
-    type: 2}
-  m_PrefabInternal: {fileID: 17275674}
-  m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!1 &1130185749
 GameObject:
   m_ObjectHideFlags: 0
@@ -18222,6 +18198,12 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1302604084}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1325894746 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11486268, guid: 226c513dfb3b7ec409427fa868d9c316,
+    type: 2}
+  m_PrefabInternal: {fileID: 17275674}
+  m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!1 &1330563827
 GameObject:
   m_ObjectHideFlags: 0
@@ -20956,11 +20938,6 @@ Transform:
   - {fileID: 39553671}
   m_Father: {fileID: 0}
   m_RootOrder: 15
---- !u!20 &1586224474 stripped
-Camera:
-  m_PrefabParentObject: {fileID: 2028100, guid: 296bd1f1b5fe71843a21f92767863f28,
-    type: 2}
-  m_PrefabInternal: {fileID: 1293345951}
 --- !u!1 &1597688127
 GameObject:
   m_ObjectHideFlags: 0
