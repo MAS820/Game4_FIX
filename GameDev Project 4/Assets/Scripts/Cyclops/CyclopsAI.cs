@@ -4,8 +4,8 @@ using System.Collections;
 public class CyclopsAI : MonoBehaviour
 {
     //Editables //some variables will be used later for animation and navigational mesh
-    public float patrolSpeed = 10f;
-    public float chaseSpeed = 30f;
+    public float patrolSpeed = 100f;
+    public float chaseSpeed = 60f;
     public float patrolWaitTime = 1f;
     public float acceleration = 0.01f;
     private float patrolTimer;
@@ -19,6 +19,7 @@ public class CyclopsAI : MonoBehaviour
     private GameObject cyclops;
     private CyclopsSight cyclopsSight;
     private CharacterController cyclopsController;
+    private Animator anim;
 
     private GameObject player;
     private Transform playerTransform;
@@ -53,10 +54,10 @@ public class CyclopsAI : MonoBehaviour
     {
         //  GS = GameObject.FindGameObjectWithTag("GameState");
         // GSscript = GS.GetComponent<GameState>();
-        // r = GetComponent<Renderer>();
         // enemyRenderer = enemy.GetComponent<Renderer>();
         cyclopsController = GetComponent<CharacterController>();
-
+        anim = GetComponent<Animator>();
+        anim.SetBool("Moving", true);
         //Field of View Script / Player Detection
         cyclopsSight = GetComponent<CyclopsSight>();
 
@@ -66,7 +67,7 @@ public class CyclopsAI : MonoBehaviour
         nav.updateRotation = true;
         alive = true;
         //autobraking causes the character to pause before each waypoint
-         //nav.autoBraking = false;
+        //nav.autoBraking = false;
 
         //char references
         player = GameObject.Find("Player");
@@ -112,11 +113,15 @@ public class CyclopsAI : MonoBehaviour
             switch (state)
             {
                 case State.PATROLLING:
+                    anim.SetBool("Moving", true);
+                    anim.SetBool("Investigating", false);
                     Patrolling();
                     break;
                 case State.INVESTIGATING:
+                    anim.SetBool("Moving", false);
+                    anim.SetBool("Investigating", true);
                     Investigating();
-                    if(!audioSources[6].isPlaying)
+                    if (!audioSources[6].isPlaying)
                     {
                         audioSources[6].Play();
                     }
@@ -126,7 +131,8 @@ public class CyclopsAI : MonoBehaviour
                     break;
                 case State.EATING:
                     Eating();
-                    if(!audioSources[1].isPlaying) {
+                    if (!audioSources[1].isPlaying)
+                    {
                         audioSources[1].Play();
                     }
                     break;
@@ -140,32 +146,38 @@ public class CyclopsAI : MonoBehaviour
     // Update is called once per frame
     void Investigating()
     {
-        nav.destination = cyclopsSight.previousSighting;
-        if (nav.remainingDistance < nav.stoppingDistance)
+
+        if (nav.remainingDistance < nav.stoppingDistance || cyclopsSight.previousSighting == Vector3.zero)
         {
             state = CyclopsAI.State.PATROLLING;
+        }
+        else
+        {
+            nav.destination = cyclopsSight.previousSighting;
+
         }
     }
 
     void GoToRockPile()
     {
         nav.speed = chaseSpeed;
-        nav.destination = rockPile.transform.position; 
+        nav.destination = rockPile.transform.position;
     }
 
     void Chasing()
     {
         //set speed;
-        //enemyRenderer.material.color = new Color(0.5f, 0.3f, 0.3f);
         nav.speed = chaseSpeed;
-        //enemyRenderer.material.color = Color.red;
-      //  cyclops.transform.Rotate();
+
         //Get the position of the player. Get the delta vector between player / enemy
         Vector3 sightingDeltaPos = cyclopsSight.previousSighting - transform.position;
         float dist = Vector3.Distance(cyclopsSight.previousSighting, transform.position);
+
         //Get the magnitude of the vector (distance)
         if (dist <= 50 && cyclopsSight.playerInSight == true)
         {
+            nav.destination = player.transform.position;
+
             if (!audioSources[0].isPlaying)
             {
                 audioSources[0].Play();
@@ -175,31 +187,20 @@ public class CyclopsAI : MonoBehaviour
                 audioSources[3].Play();
             }
             //Tell enemy to walk to player location
-            nav.destination = player.transform.position;
-        }
-        else 
-        {
-            nav.destination = cyclopsSight.previousSighting;
-            cyclopsSight.playerInSight = false;
-        }
-        //If we're nearing the destination, add to chase timer.
-        /*if (nav.remainingDistance < nav.stoppingDistance)
-        {
-            chaseds= Time.deltaTime;
-            //Chasing cooldown, ensures that monster continues moving
-            if (chaseTimer >= chaseWaitTime)
-            {
-                chaseTimer = 0f;
-            }
         }
         else
         {
-            chaseTimer = 0f;
-        }*/
+            nav.destination = cyclopsSight.previousSighting;
+        }
+
     }
 
     void Patrolling()
     {
+
+
+
+        nav.speed = patrolSpeed;
         //enemyRenderer.material.color = Color.green;
         if (cyclopsSight.playerInSight)
         {
@@ -211,23 +212,11 @@ public class CyclopsAI : MonoBehaviour
 
             //Get the position of the first waypoint
             waypoint = wayPoints[wayPointIndex].transform.position;
-            if (nav.speed != patrolSpeed && playerLastSeen < 0)
-            {
-                Debug.Log("hello");
-                nav.speed = patrolSpeed;
-
-            }
-            else
-            {
-                nav.speed += acceleration;
-
-            }
             // Debug.Log(waypoint);
             //float dist = Vector3.Distance(waypoint, transform.position);
             if (nav.remainingDistance < nav.stoppingDistance)
             {
                 nav.destination = waypoint;
-                Debug.Log(Time.time);
 
                 //If we reach the end of the list, start over
                 if (wayPointIndex == wayPoints.Length - 1)
@@ -240,8 +229,9 @@ public class CyclopsAI : MonoBehaviour
                     wayPointIndex++;
                 }
                 //basic investigation state. checks the spot of player last seen if its been a while.
-                if (Time.time - playerLastSeen > 20.0f && cyclopsSight.playerInSight == false)
+                if (Time.time - playerLastSeen > 15.0f)
                 {
+
                     //state = CyclopsAI.State.ENRAGED;
                     if (rockPile != null)
                     {
@@ -269,15 +259,20 @@ public class CyclopsAI : MonoBehaviour
 
     void Eating()
     {
-        if (rockPile.numRatsDigging > 0)
+        if (rockPile != null)
         {
-            rockPile.numRatsDigging -= eatRate * Time.deltaTime;
-        }
-        else
-        {
-           state = CyclopsAI.State.PATROLLING;
+            if (rockPile.numRatsDigging > 0)
+            {
+                rockPile.numRatsDigging -= eatRate * Time.deltaTime;
 
+            }
+            else
+            {
+                state = CyclopsAI.State.PATROLLING;
+
+            }
         }
+
     }
 
     void Update()

@@ -2,9 +2,11 @@
 using System.Collections;
 
 //Still working on this one, will clean up.
-public class CyclopsSight : MonoBehaviour {
+public class CyclopsSight : MonoBehaviour
+{
     public float fieldOfViewAngle = 190f;
     public bool playerInSight;
+
     public bool gameOver;
     Light currentLight;
     private NavMeshAgent nav;
@@ -13,14 +15,16 @@ public class CyclopsSight : MonoBehaviour {
     private GameObject player;
     private GameObject cyclops;
     private Animator playerAnim;
+    private Vector3 playerPos;
     public Vector3 previousSighting;
     public CyclopsAI cyclopsAI;
     private CharacterController cyclopsController;
 
-    
+
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         gameOver = false;
         nav = GetComponent<NavMeshAgent>();
         col = GetComponent<CapsuleCollider>();
@@ -31,22 +35,24 @@ public class CyclopsSight : MonoBehaviour {
         nav.updateRotation = true;
         nav.updatePosition = true;
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update()
+    {
         if (!gameOver)
         {
+            playerPos = player.transform.position;
         }
-        	
-	}
 
-    void OnTriggerStay (Collider other)
+    }
+
+    void OnTriggerStay(Collider other)
     {
 
         if (other.gameObject == player)
         {
 
-            playerInSight = false;
+            //playerInSight = false;
             //Debug.Log(playerInSight);
             Vector3 direction = other.transform.position - transform.position;
             float angle = Vector3.Angle(direction, transform.forward);
@@ -59,57 +65,61 @@ public class CyclopsSight : MonoBehaviour {
                 {
                     if (hit.collider.gameObject == player)
                     {
-                        //player is seen
                         playerInSight = true;
-                        previousSighting = player.transform.position;
+                        previousSighting = playerPos;
 
                     }
                 }
             }
             else
             {
-                if (Vector3.Distance(transform.position, player.transform.position) < 30)
+                // small radius check around the cyclops so to agro player.
+
+                if (Vector3.Distance(transform.position, playerPos) < 45)
                 {
                     playerInSight = true;
-                    previousSighting = player.transform.position;
-
+                    previousSighting = playerPos;
+                }
+                else
+                {
+                    playerInSight = false;
                 }
 
             }
-            //Add another small radius check around the cyclops so to agro player.
 
         }
 
-        if (other.gameObject.tag == "Lamps")
+        else if (other.gameObject.tag == "Lamps")
         {
 
             Light current = other.gameObject.GetComponentInChildren<Light>();
             //Debug.Log(current.enabled);
-                if (current.enabled)
-                {
-                    nav.destination = current.transform.position;
+            if (current.enabled)
+            {
+                nav.destination = current.transform.position;
 
-                    float dist = Vector3.Distance(transform.position, current.transform.position);
-                //Debug.Log("the distance is " + dist);
-                    if (dist < 50)
-                    {
-                        current.enabled = false;
-                         //cyclopsAI.state = CyclopsAI.State.PATROLLING;
+                float dist = Vector3.Distance(transform.position, current.transform.position);
+                if (dist < 20)
+                {
+                    current.enabled = false;
+                    //cyclopsAI.state = CyclopsAI.State.PATROLLING;
 
                 }
             }
         }
-        if (other.gameObject.tag == "Projectile")
+        else if (other.gameObject.tag == "Projectile")
         {
-            nav.destination = player.transform.position;
+            //cyclopsAI.state = CyclopsAI.State.CHASING;
+            playerInSight = true;
+            nav.destination = playerPos;
         }
     }
-    void OnTriggerExit (Collider other)
+    void OnTriggerExit(Collider other)
     {
         if (other.gameObject == player)
         {
-            playerInSight = true;
-            
+            playerInSight = false;
+
         }
     }
 }
