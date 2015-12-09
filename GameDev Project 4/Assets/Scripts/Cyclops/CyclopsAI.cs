@@ -46,6 +46,9 @@ public class CyclopsAI : MonoBehaviour
     public RockPile rockPile;
     private float playerLastSeen;
 
+    public AudioClip[] audioClips;
+    private AudioSource[] audioSources;
+
     void Start()
     {
         //  GS = GameObject.FindGameObjectWithTag("GameState");
@@ -77,6 +80,29 @@ public class CyclopsAI : MonoBehaviour
         //Get the list of waypoint objects.
         wayPoints = GameObject.FindGameObjectsWithTag("CyclopsWaypoint");
 
+        audioSources = new AudioSource[audioClips.Length];
+        int i = 0;
+        while (i < audioClips.Length)
+        {
+            audioSources[i] = this.gameObject.AddComponent<AudioSource>() as AudioSource;
+            audioSources[i].clip = audioClips[i];
+            i++;
+        }
+        audioSources[0].playOnAwake = false;
+        audioSources[0].loop = false;
+        audioSources[1].playOnAwake = false;
+        audioSources[1].loop = true;
+        audioSources[2].playOnAwake = false;
+        audioSources[2].loop = false;
+        audioSources[3].playOnAwake = false;
+        audioSources[3].loop = true;
+        audioSources[4].playOnAwake = false;
+        audioSources[4].loop = true;
+        audioSources[5].playOnAwake = false;
+        audioSources[5].loop = true;
+        audioSources[6].playOnAwake = false;
+        audioSources[6].loop = false;
+
         StartCoroutine("FSM");
     }
     IEnumerator FSM()
@@ -90,12 +116,19 @@ public class CyclopsAI : MonoBehaviour
                     break;
                 case State.INVESTIGATING:
                     Investigating();
+                    if(!audioSources[6].isPlaying)
+                    {
+                        audioSources[6].Play();
+                    }
                     break;
                 case State.CHASING:
                     Chasing();
                     break;
                 case State.EATING:
                     Eating();
+                    if(!audioSources[1].isPlaying) {
+                        audioSources[1].Play();
+                    }
                     break;
                 case State.ENRAGED:
                     Enraged();
@@ -133,6 +166,14 @@ public class CyclopsAI : MonoBehaviour
         //Get the magnitude of the vector (distance)
         if (dist <= 50 && cyclopsSight.playerInSight == true)
         {
+            if (!audioSources[0].isPlaying)
+            {
+                audioSources[0].Play();
+            }
+            if (!audioSources[3].isPlaying)
+            {
+                audioSources[3].Play();
+            }
             //Tell enemy to walk to player location
             nav.destination = player.transform.position;
         }

@@ -30,7 +30,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 194034}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .946633816, y: 1.08894253, z: -2.44000006}
+  m_LocalPosition: {x: 3.48562193, y: 1, z: -3.97859526}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -98,6 +98,7 @@ MonoBehaviour:
   playerInSight: 0
   gameOver: 0
   previousSighting: {x: 0, y: 0, z: 0}
+  cyclopsAI: {fileID: 0}
 --- !u!114 &11455530
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -111,8 +112,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   patrolSpeed: 2
   chaseSpeed: 5
-  chaseWaitTime: 5
   patrolWaitTime: 1
+  acceleration: .00999999978
   patrolWayPoints: []
   wayPoints: []
   waypoint: {x: 0, y: 0, z: 0}
@@ -121,6 +122,14 @@ MonoBehaviour:
   MatCyclopsPatrolling: {fileID: 0}
   eatRate: 1
   rockPile: {fileID: 0}
+  audioClips:
+  - {fileID: 8300000, guid: f7794e1b01d3eaa44b8d9e79a5b49c9e, type: 3}
+  - {fileID: 8300000, guid: cdcd91151a96fed468643d1bbc944a69, type: 3}
+  - {fileID: 8300000, guid: 49c36d4a6155c41478d12d5ba1f1dc3b, type: 3}
+  - {fileID: 8300000, guid: 97278d29a54a99b45baf135855eb3391, type: 3}
+  - {fileID: 8300000, guid: 5566f6b20e853974b86ecab872a102c0, type: 3}
+  - {fileID: 8300000, guid: f378c234c50368941a17b937ee468526, type: 3}
+  - {fileID: 8300000, guid: 4a2f12ffdee22f44fbae23b34ef24c03, type: 3}
 --- !u!136 &13686302
 CapsuleCollider:
   m_ObjectHideFlags: 1
