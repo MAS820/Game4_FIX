@@ -124,10 +124,12 @@ public class CyclopsAI : MonoBehaviour
                     anim.SetBool("Chasing", true);
 
                     Eating();
+                    /*
                     if (!audioSources[1].isPlaying)
                     {
                         audioSources[1].Play();
                     }
+                    */
                     break;
                 case State.ENRAGED:
                     Enraged();
