@@ -95,11 +95,11 @@ public class CyclopsAI : MonoBehaviour
         audioSources[2].playOnAwake = false;
         audioSources[2].loop = false;
         audioSources[3].playOnAwake = false;
-        audioSources[3].loop = false;
+        audioSources[3].loop = true;
         audioSources[4].playOnAwake = false;
-        audioSources[4].loop = false;
+        audioSources[4].loop = true;
         audioSources[5].playOnAwake = false;
-        audioSources[5].loop = false;
+        audioSources[5].loop = true;
         audioSources[6].playOnAwake = false;
         audioSources[6].loop = false;
 
@@ -123,10 +123,6 @@ public class CyclopsAI : MonoBehaviour
                     break;
                 case State.CHASING:
                     Chasing();
-                    if(!audioSources[0].isPlaying)
-                    {
-                        audioSources[0].Play();
-                    }
                     break;
                 case State.EATING:
                     Eating();
@@ -170,6 +166,14 @@ public class CyclopsAI : MonoBehaviour
         //Get the magnitude of the vector (distance)
         if (dist <= 50 && cyclopsSight.playerInSight == true)
         {
+            if (!audioSources[0].isPlaying)
+            {
+                audioSources[0].Play();
+            }
+            if (!audioSources[3].isPlaying)
+            {
+                audioSources[3].Play();
+            }
             //Tell enemy to walk to player location
             nav.destination = player.transform.position;
         }

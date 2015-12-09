@@ -80,7 +80,7 @@ MonoBehaviour:
   playerController: {fileID: 0}
   cyclops: {fileID: 0}
   audioClips:
-  - {fileID: 8300000, guid: 3a4d819088529d8468449437c41323c6, type: 3}
+  - {fileID: 8300000, guid: 89dbefa9c1729ff43b85a2f57f514445, type: 3}
   - {fileID: 8300000, guid: a141f4956e43e5b4e9051d74a8a30209, type: 3}
   - {fileID: 8300000, guid: 21fe101227f06a74c8d4fd889edd6f89, type: 3}
 --- !u!135 &13511924
