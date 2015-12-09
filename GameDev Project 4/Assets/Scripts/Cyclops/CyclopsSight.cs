@@ -51,7 +51,7 @@ public class CyclopsSight : MonoBehaviour
 
         if (other.gameObject == player)
         {
-
+            
             //playerInSight = false;
             //Debug.Log(playerInSight);
             Vector3 direction = other.transform.position - transform.position;
@@ -93,6 +93,8 @@ public class CyclopsSight : MonoBehaviour
         {
 
             Light current = other.gameObject.GetComponentInChildren<Light>();
+            LightToggle LTscript = current.GetComponent<LightToggle>();
+
             //Debug.Log(current.enabled);
             if (current.enabled)
             {

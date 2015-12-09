@@ -23,9 +23,7 @@ public class CyclopsAI : MonoBehaviour
 
     private GameObject player;
     private Transform playerTransform;
-    //  private Renderer enemyRenderer;
-    // private GameObject GS;
-    //  private GameState GSscript;
+
     private bool alive;
     // Use this for initialization
     public enum State
@@ -37,11 +35,6 @@ public class CyclopsAI : MonoBehaviour
         ENRAGED
     }
     public State state;
-    public Renderer r;
-
-    //Patrolling var
-    public Material MatCyclopsPatrolling;
-
     //Use this to eat rats
     public float eatRate = 1.0f;
     public RockPile rockPile;
@@ -66,15 +59,12 @@ public class CyclopsAI : MonoBehaviour
         nav.updatePosition = true;
         nav.updateRotation = true;
         alive = true;
-        //autobraking causes the character to pause before each waypoint
-        //nav.autoBraking = false;
 
         //char references
         player = GameObject.Find("Player");
         playerTransform = player.transform;
         state = CyclopsAI.State.PATROLLING;
         cyclops = GameObject.Find("Cyclops");
-        //  enemyTransform = enemy.transform;
 
         //Set the first waypoint
         wayPointIndex = 0;
@@ -201,7 +191,6 @@ public class CyclopsAI : MonoBehaviour
 
 
         nav.speed = patrolSpeed;
-        //enemyRenderer.material.color = Color.green;
         if (cyclopsSight.playerInSight)
         {
             state = CyclopsAI.State.CHASING;
@@ -213,7 +202,6 @@ public class CyclopsAI : MonoBehaviour
             //Get the position of the first waypoint
             waypoint = wayPoints[wayPointIndex].transform.position;
             // Debug.Log(waypoint);
-            //float dist = Vector3.Distance(waypoint, transform.position);
             if (nav.remainingDistance < nav.stoppingDistance)
             {
                 nav.destination = waypoint;

@@ -16,7 +16,8 @@ public class LightToggle : MonoBehaviour {
     //Player and current light
     private GameObject playerObject;
     private PlayerController playerController;
-
+    private GameObject cyclopsObject;
+    private CyclopsSight cyclopsSight;
     private float targetIntensity;
 
     //Vectors and distance
@@ -31,11 +32,15 @@ public class LightToggle : MonoBehaviour {
         currentLight = GetComponent<Light>();
         playerObject = GameObject.Find("Player");
         playerController = playerObject.GetComponent<PlayerController>();
+        //and cyclops
+        cyclopsObject = GameObject.Find("Cyclops");
+        cyclopsSight = cyclopsObject.GetComponent<CyclopsSight>();
         //Init light values
         currentLight.intensity = 1.5f;
         currentLight.range = range;
         targetIntensity = highIntensity;
         obj = GameObject.FindGameObjectWithTag("MainCamera");
+        
     }
 
     // Update is called once per frame
@@ -63,11 +68,14 @@ public class LightToggle : MonoBehaviour {
                 if (hit.transform.gameObject.tag == "Player")
                 {
                     playerInLight = true;
+                    cyclopsSight.previousSighting = hit.transform.gameObject.transform.position;
+                    
                 }
                 else
                 {
                     playerInLight = false;
                 }
+                cyclopsSight.playerInSight = playerInLight;
             }
             Debug.DrawLine(this.transform.position, hit.point, Color.cyan, 1.0f);
         }
