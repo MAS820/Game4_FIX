@@ -32,6 +32,8 @@ public class GameState : MonoBehaviour {
     private float stamScale = 4.0f;
     private Vector3 origin;
 
+    public float amountToDig = 50.0f;
+
 	// Use this for initialization
 	void Start () {
 		TimeRemaining = 100.0f;
@@ -56,12 +58,21 @@ public class GameState : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		ratSpawn ();
+        if(amountToDig > 0.0)
+        {
+            amountToDig -= rockPile.uRRPS * Time.deltaTime;
+        }
+        else
+        {
+            amountToDig = 0.0f;
+        }
 
 		TimeRemaining -= Time.deltaTime; 
 		countDown.text = ((int)TimeRemaining).ToString ();
         staminaBar.rectTransform.sizeDelta = new Vector2(playerController.stamina, 20);
 		NumRatsHeld.text = "Number of Rats Held: " + playerController.numRats.ToString();
-        uRRPS.text = "Units of Rock Removed Per Second: " + rockPile.uRRPS.ToString();
+        uRRPS.text = "Amount Left to Dig: " + amountToDig.ToString("F2");
+        //uRRPS.text = "Units of Rock Removed Per Second: " + rockPile.uRRPS.ToString();
         numRatsDigging.text = "Number of Rats Digging: " + rockPile.numRatsDigging.ToString();
         //playerVisible.text = "Player visible: " + playerController.isVisible.ToString();
         visibilityAmount.text = "Visibility Amount: " + playerController.visibilityAmount.ToString();
