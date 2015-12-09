@@ -167,16 +167,12 @@ public class RatAI : MonoBehaviour {
 		if (Other.tag == "Player" && state.ToString () != "TRAPPED") {
 			state = RatAI.State.FLEE;
 		}
-
-		if (Other.tag == "Cyclops" && state.ToString () != "TRAPPED") {
-			state = RatAI.State.FLEE;
-		}
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		float distPlayer = Vector3.Distance (this.transform.position, PlayerTransform.transform.position);
-		if (distPlayer <= 3.0) {
+		if (distPlayer <= 10) {
 			if (Input.GetKeyUp (KeyCode.E) && state == RatAI.State.TRAPPED){
 				PlayerCon.IncNumRats ();
 				GSscript.subRat ();
