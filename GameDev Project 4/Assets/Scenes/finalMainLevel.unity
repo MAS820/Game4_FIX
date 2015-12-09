@@ -20658,6 +20658,33 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 456872, guid: 875e78608fb088a4180fd5297b680828, type: 2}
   m_PrefabInternal: {fileID: 1470317786}
+--- !u!1 &1487772295
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1487772296}
+  m_Layer: 0
+  m_Name: CyclopsWP (3)
+  m_TagString: CyclopsWaypoint
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1487772296
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1487772295}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -43.2000008, y: -29.8500023, z: -16.7999992}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1930951925}
+  m_RootOrder: 3
 --- !u!1 &1488938917 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 169192, guid: 875e78608fb088a4180fd5297b680828, type: 2}
@@ -25384,6 +25411,7 @@ Transform:
   - {fileID: 935941916}
   - {fileID: 680068719}
   - {fileID: 1025761034}
+  - {fileID: 1487772296}
   m_Father: {fileID: 0}
   m_RootOrder: 24
 --- !u!1 &1931231928
@@ -26712,7 +26740,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2126037436}
-  m_LocalRotation: {x: .195822835, y: .0287336856, z: -.970665157, w: .136517644}
+  m_LocalRotation: {x: .175112113, y: .103469133, z: -.949008405, w: .240858749}
   m_LocalPosition: {x: -7, y: -3, z: 4.80000019}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []

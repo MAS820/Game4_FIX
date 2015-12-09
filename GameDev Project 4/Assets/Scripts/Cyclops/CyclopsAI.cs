@@ -103,12 +103,11 @@ public class CyclopsAI : MonoBehaviour
             switch (state)
             {
                 case State.PATROLLING:
-                    anim.SetBool("Moving", true);
-                    anim.SetBool("Investigating", false);
                     Patrolling();
                     break;
                 case State.INVESTIGATING:
                     anim.SetBool("Moving", false);
+                    anim.SetBool("Chasing", false);
                     anim.SetBool("Investigating", true);
                     Investigating();
                     if (!audioSources[6].isPlaying)
@@ -117,9 +116,13 @@ public class CyclopsAI : MonoBehaviour
                     }
                     break;
                 case State.CHASING:
+
                     Chasing();
                     break;
                 case State.EATING:
+                    anim.SetBool("Moving", false);
+                    anim.SetBool("Chasing", true);
+
                     Eating();
                     if (!audioSources[1].isPlaying)
                     {
@@ -189,10 +192,16 @@ public class CyclopsAI : MonoBehaviour
     {
 
 
+        anim.SetBool("Moving", true);
+        anim.SetBool("Investigating", false);
+        anim.SetBool("Chasing", false);
 
         nav.speed = patrolSpeed;
         if (cyclopsSight.playerInSight)
         {
+            anim.SetBool("Moving", false);
+            anim.SetBool("Chasing", true);
+
             state = CyclopsAI.State.CHASING;
             playerLastSeen = Time.time;
         }

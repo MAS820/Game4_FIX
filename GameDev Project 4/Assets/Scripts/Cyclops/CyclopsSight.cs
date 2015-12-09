@@ -75,7 +75,7 @@ public class CyclopsSight : MonoBehaviour
             {
                 // small radius check around the cyclops so to agro player.
 
-                if (Vector3.Distance(transform.position, playerPos) < 45)
+                if (Vector3.Distance(transform.position, playerPos) < 50)
                 {
                     playerInSight = true;
                     previousSighting = playerPos;
