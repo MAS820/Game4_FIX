@@ -146,6 +146,7 @@ public class PlayerController : MonoBehaviour {
             LightToggle light = obj.GetComponent<LightToggle>();
             if(light.playerInLight)
             {
+                print("randns");
                 if(isCrouching)
                 {
                     tempVisAmount += (light.currentLight.intensity * 1 / (light.distance + 0.0000001f)) / 2.0f;
