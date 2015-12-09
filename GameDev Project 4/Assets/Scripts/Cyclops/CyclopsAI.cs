@@ -199,12 +199,12 @@ public class CyclopsAI : MonoBehaviour
                     wayPointIndex++;
                 }
                 //basic investigation state. checks the spot of player last seen if its been a while.
-                if (Time.time - playerLastSeen > 15.0f && cyclopsSight.playerInSight == false)
+                if (Time.time - playerLastSeen > 20.0f && cyclopsSight.playerInSight == false)
                 {
                     //state = CyclopsAI.State.ENRAGED;
                     if (rockPile != null)
                     {
-                        if (rockPile.numRatsDigging > 10)
+                        if (rockPile.numRatsDigging > 5)
                         {
                             state = CyclopsAI.State.ENRAGED;
                         }

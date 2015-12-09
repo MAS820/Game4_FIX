@@ -84,13 +84,13 @@ public class CyclopsSight : MonoBehaviour {
         {
 
             Light current = other.gameObject.GetComponentInChildren<Light>();
-            Debug.Log(current.enabled);
+            //Debug.Log(current.enabled);
                 if (current.enabled)
                 {
                     nav.destination = current.transform.position;
 
                     float dist = Vector3.Distance(transform.position, current.transform.position);
-                Debug.Log("the distance is " + dist);
+                //Debug.Log("the distance is " + dist);
                     if (dist < 50)
                     {
                         current.enabled = false;
@@ -98,8 +98,10 @@ public class CyclopsSight : MonoBehaviour {
 
                 }
             }
-
-            
+        }
+        if (other.gameObject.tag == "Projectile")
+        {
+            nav.destination = player.transform.position;
         }
     }
     void OnTriggerExit (Collider other)
